@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "محصولات";
+}
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="@BaseController.MakeLanguageUrl("/home")"><i class="fas fa-home"></i></a></li>
+            <li>@Asefian.Web.Resource.Translation.Product</li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div id="main-page-container" class="relative">
+            @*<div class="uk-width-1-4">
+                <input type="text" class="uk-input search" placeholder="عبارت جستجو" name="word" />*@
+
+            @*@Html.Action("_BrandList")*@
+            @*</div>*@
+            <div @*class="uk-width-3-4"*@>
+                <div id="list" data-url='@BaseController.MakeLanguageUrl("/product/search")' method="post" count="48">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#list").list({
+                success: function () {
+                    $('.grid').packery({
+                        itemSelector: '.grid-item',
+                        gutter: 0,
+                        originLeft: false
+                    });
+                }
+            });
+            $(".search").on("keypress", function (event) {
+                if (event.which == 13) {
+                    resetParam('word', $(this).val())
+                }
+            });
+            //$(".brand").on("change", function () {
+            //    var value = $(".brand:checked").map(function () {
+            //        return $(this).val();
+            //    }).get();
+            //    setParam('brand', value);
+            //});
+
+        });
+    </script>
+    @Html.Partial("_ProductListTemplate")
+
+
+}

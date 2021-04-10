@@ -1,0 +1,21 @@
+﻿@model  Asefian.Model.Context.Blog.NewsTranslation
+
+<div class="uk-container">
+
+    <div class="uk-margin">
+        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+            <div class="uk-card-media-left uk-cover-container">
+                <img src="/upload/image/resize/500x500/@Model.News.FileId/@Model.News.FileName" alt="" uk-cover>
+                <canvas width="600" height="400"></canvas>
+            </div>
+            <div>
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">@Model.News.TranslationList.Single(x => x.LanguageId == BaseController.GetLanguage().Id).Title</h3>
+                    <p style="overflow-wrap: break-word">@Model.News.TranslationList.Single(x => x.LanguageId == BaseController.GetLanguage().Id).AbstractText</p>
+                </div>
+            </div>
+        </div>
+        <span style="overflow-wrap: break-word;">@Html.Raw(Model.News.TranslationList.Single(x => x.LanguageId == BaseController.GetLanguage().Id).Text)</span>
+    </div>
+</div>
+

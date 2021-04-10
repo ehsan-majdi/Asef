@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - مدیریت</title>
+    @Styles.Render("~/styles/core")
+    @Styles.Render("~/styles/admin")
+</head>
+@{
+    var user = Asefian.Web.Controllers.BaseController.StaticGetAuthenticatedUser();
+}
+<body style="min-width: 100%;">
+    <div>
+        <nav class="uk-navbar-container" uk-navbar style="position: relative; z-index: 980;">
+            <div>
+                <ul class="uk-navbar-nav">
+                    <li><a href="#main-menu-bar" uk-toggle="target: #main-menu-bar"><i class="fas fa-bars" style="font-size: 20px;"></i></a></li>
+                </ul>
+            </div>
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li uk-tooltip="سایت"><a href="@Asefian.Web.Controllers.BaseController.MakeLanguageUrl("/home")" target="_blank"><i class="fas fa-home-heart" style="font-size: 20px"></i></a></li>
+                    <li uk-tooltip="..."><a href="/dashboard/order/list"><i class="fas fa-file-alt" style="font-size: 20px"></i></a></li>
+                    <li uk-tooltip="تنظیمات کاربری"><a href="/admin/user/settings"><i class="fa fa-cogs"></i></a></li>
+                    <li uk-tooltip="خروج"><a href="/logout"><i class="far fa-sign-out"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    @RenderBody()
+
+    <div id="main-menu-bar" uk-offcanvas="overlay: true">
+        <div class="uk-offcanvas-bar">
+
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <br />
+            <br />
+            <div id="menu">
+                <span style="border-bottom: 1px solid gray;padding-bottom: 13px;"><i style="color:#1e87f0" class="fa fa-user icon"></i> @user.firstName @user.lastName </span>
+                <hr />
+                <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+                    <li><a href="/admin/dashboard"><i style="color:#0abb87" class="fas fa-tachometer-alt icon"></i> داشبورد</a></li>
+                    @if (User.IsInRole("admin") || User.IsInRole("user"))
+                    {
+                        <li class="uk-parent">
+                            <a href="#"><i style="color:deepskyblue" class="fas fa-users icon"></i> مدیریت کاربران</a>
+                            <ul class="uk-nav-sub">
+                                <li><a href="/admin/user/list"><i class="fal fa-users icon"></i> کاربران برنامه</a></li>
+                            </ul>
+                        </li>
+                    }
+                    <li class="uk-parent">
+                        <a href="#"><i style="color:darkgray" class="fas fa-cogs icon"></i>  تنظیمات کاربری</a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="/admin/user/settings"><i class="fas fa-edit icon"></i> تغییر مشخصات</a></li>
+                            <li><a href="/admin/user/changePassword"><i class="fal fa-key icon"></i> تغییر گذرواژه</a></li>
+                        </ul>
+                    </li>
+                    <li class="uk-parent">
+                        <a href="#"><i style="color:blue" class="fas fa-cogs icon"></i> محصول</a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="/admin/product/list"><i class="fal fa-boxes icon"></i> محصولات </a></li>
+                            <li><a href="/admin/brand/list"><i class="fal fa-boxes icon"></i> برند </a></li>
+                            <li><a href="/admin/category/list"><i class="fal fa-cauldron icon"></i> دسته بندی </a></li>
+                        </ul>
+                    </li>
+                    <li class="uk-parent">
+                        <a href="#"><i style="color:deeppink" class="fas fa-images icon"></i>پروژه ها</a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="/admin/specialProject/list"><i class="fal fa-boxes icon"></i> لیست پروژه ها </a></li>
+                        </ul>
+                    </li> 
+                    <li class="uk-parent">
+                        <a href="#"><i style="color:darkorange" class="fas fa-inbox icon"></i>پشتیبانی</a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="/admin/messagebox/contactUsList"><i class="fal fa-inbox-in icon"></i> صندوق پیام های تماس با ما</a></li>
+                            <li><a href="/admin/messagebox/designerList"><i class="fal fa-inbox-in icon"></i> صندوق پیام های دیزاینر</a></li>
+                            <li><a href="/admin/messagebox/workWithUsList"><i class="fal fa-question-square icon"></i> صندوق پیام های همکاری با ما</a></li>
+                        </ul>
+                    </li>
+                    <li class="uk-parent">
+                        <a href="#"><i style="color:darkblue" class="icon fas fa-sitemap"></i>اطلاعات سایت</a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="/admin/slider/list"><i class="fal fa-presentation icon"></i> اسلایدر </a></li>
+                            <li><a href="/admin/site/page/aboutus"><i class="fal fa-info icon"></i> درباره ما </a></li>
+                            <li><a href="/admin/site/contact"><i class="fal fa-phone icon"></i> تماس با ما </a></li>
+                            <li><a href="/admin/service/list"><i class="fal fa-check icon"></i> خدمات </a></li>
+                            <li><a href="/admin/news/list"><i class="fal fa-newspaper icon"></i> اخبار </a></li>
+                            <li><a href="/admin/site/settings"><i class="fal fa-cogs icon"></i> تنظیمات </a></li>
+                            @*<li><a href="/admin/news/list"><i class="fal fa-newspaper icon"></i> اخبار </a></li>*@
+                            @*<li><a href="/admin/article/list"><i class="fal fa-hand-paper icon"></i> مقالات </a></li>*@
+
+                        </ul>
+                    </li>
+                    <li><a href="/logout"><i class="fas fa-power-off icon red"></i> خروج</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/scripts/web")
+    <script type="text/javascript" src="/admin/menu.js"></script>
+    <script src="/scripts/app/jquery.menu.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

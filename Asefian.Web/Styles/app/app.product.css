@@ -1,0 +1,67 @@
+﻿.gallery-add-file, .gallery-file {
+    width: 120px;
+    height: 120px;
+    background-size: contain;
+    background-color: transparent;
+}
+
+.add-file {
+    background-color: black
+}
+
+.gallery-del-icon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    background-color: #f44336;
+    text-align: center;
+    border-radius: 4px
+}
+
+    .gallery-del-icon i {
+        color: #eee
+    }
+
+
+#list {
+    padding: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.item {
+    background-color: white;
+    height: 100%;
+}
+
+    .item label {
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .item .uk-card-header {
+        padding: 0 0 15px 0;
+    }
+
+.uk-card-title {
+    margin-bottom: 5px;
+}
+
+.item-container {
+    overflow-y: auto;
+    max-height: 185px;
+}
+
+.uk-checkbox, .uk-radio {
+    margin-top: 0px;
+    margin-left: 3px;
+}
+
+.item-color {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}

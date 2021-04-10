@@ -1,0 +1,51 @@
+﻿@model List<Asefian.Model.Context.Core.BaseInformation>
+@{
+    ViewBag.Title = "تعرفه های ارسال فروشگاه";
+}
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/site/settings">تنظیمات سایت</a></li>
+            <li>تعرفه های ارسال فروشگاه</li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-1@m uk-child-width-1-1@l uk-flex-center" uk-grid>
+            <form id="frmSettings" class="form" action="/admin/site/tariff" method="post" data-success="saveComplete" loader="1">
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtOrderGapDay">فاصله زمانی روز که کاربر می بایست حداقل صبر کند تا سفارش خود را تحویل بگیرد</label>
+                    <div class="uk-form-controls">
+                        <input id="txtOrderGapDay" class="uk-input number-only" type="text" name="orderGapDay" data-validate="required, number" value="@(Model.SingleOrDefault(x=> x.Key == Asefian.Model.Metadata.BaseInformationKey.OrderGapDay)?.Value)" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtMinDeliveryFreePrice">حداقل مبلغ سفارش برای ارسال رایگان</label>
+                    <div class="uk-form-controls">
+                        <input id="txtMinDeliveryFreePrice" class="uk-input number-only money-separator" type="text" name="minDeliveryFreePrice" data-validate="required, number" value="@(Model.SingleOrDefault(x=> x.Key == Asefian.Model.Metadata.BaseInformationKey.MinDeliveryFreePrice)?.Value.ToLong().ToString("N0"))" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtDeliveryPrice">هزینه ارسال</label>
+                    <div class="uk-form-controls">
+                        <input id="txtDeliveryPrice" class="uk-input number-only money-separator" type="text" name="deliveryPrice" data-validate="required, number" value="@(Model.SingleOrDefault(x=> x.Key == Asefian.Model.Metadata.BaseInformationKey.DeliveryPrice)?.Value.ToLong().ToString("N0"))" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <button id="btnSubmit" type="submit" class="uk-button uk-button-primary">ذخیره</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="/scripts/app/site/app.tariff.js"></script>
+}

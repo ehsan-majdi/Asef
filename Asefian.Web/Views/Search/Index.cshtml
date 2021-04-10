@@ -1,0 +1,64 @@
+﻿@model  List<Asefian.Model.ViewModel.Data.ProductViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .link p {
+        text-decoration: none !important;
+    }
+
+        .link p:hover {
+            text-decoration: none !important;
+        }
+
+    .flex-container {
+        align-items: stretch;
+        display: flex;
+    }
+
+        .flex-container > div {
+            align-items: center;
+            display: flex;
+        }
+</style>
+<div class="uk-container">
+    @if (Model.Count > 0)
+    {
+        <div class="uk-width-1-1">
+            <div class="uk-child-width-expand@s uk-text-center uk-grid">
+                @foreach (var item in Model)
+                {
+                    <div class="flex-container">
+                        <a class="link" href="/product/@(item.id)/@item.sku.ToUrlString()">
+                            @if (!string.IsNullOrEmpty(item.fileId))
+                            {
+                                <div class="img-slider">
+                                    <img src="/upload/image/resize/500x500/@item.fileId/@item.fileName" />
+                                    <div class="title-slider">
+                                        <p uk-tooltip="title:کد محصول : @item.code ">@item.code </p>
+                                    </div>
+                                </div>
+
+
+                            }
+                            else
+                            {
+                                <img class="uk-transition-scale-up uk-transition-opaque" src="/images/no-image.png" />
+                            }
+
+                        </a>
+
+                    </div>
+
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p class="uk-text-center">
+            @ViewBag.Term
+        </p>
+    }
+</div>
+

@@ -1,0 +1,10 @@
+﻿@model Asefian.Model.Context.Core.BaseInformation
+@if (Model != null)
+{
+    <div id="map" style="height: 300px;  width: 100%;z-index:0"></div>
+
+    <script type="text/javascript">
+        var latitude = @(Model.Value.Split('/')[0]);
+        var longitude = @(Model.Value.Split('/')[1]);
+    </script>
+}

@@ -1,0 +1,56 @@
+﻿@Styles.Render("~/styles/editor")
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/site/settings">تنظیمات</a></li>
+            <li><a href="/admin/site/page/@ViewBag.Key">@ViewBag.Title</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-1@m uk-child-width-1-1@l uk-flex-center" uk-grid>
+            <form id="frmPage" class="form" action="/admin/site/savePage"  method="post" data-success="saveComplete" loader="1">
+                <div class="uk-width-1-1@m uk-margin-medium-top">
+                    <ul uk-tab="connect: #translationList">
+                        @foreach (var item in Asefian.Model.Context.Language.GetList())
+                        {
+                            <li class="languageId" data-id="@item.Id"><a href="#">@item.PersianTitle</a></li>
+                        }
+                    </ul>
+                    <ul id="translationList" class="uk-switcher uk-margin" data-list="translations">
+
+                        <li data-list-form>
+                            <input name="languageId" type="hidden" value="1" key lock />
+                            <label>متن</label>
+                            <div class="uk-inline uk-width-1-1">
+                                <span class="uk-form-icon"><i class="fal fa-heading"></i></span>
+                                <textarea class="uk-input txtText" type="text" name="value" data-validate="required">@ViewBag.PersianData</textarea>
+                            </div>
+                        </li>
+                        <li data-list-form>
+                            <input name="languageId" type="hidden" value="2" key lock />
+                            <label>متن</label>
+                            <div class="uk-inline uk-width-1-1">
+                                <span class="uk-form-icon"><i class="fal fa-heading"></i></span>
+                                <textarea class="uk-input txtText" type="text" name="value" data-validate="required">@ViewBag.EnglishData</textarea>
+                            </div>                                                     
+                        </li>
+
+                    </ul>
+                </div>
+                <input type="hidden" name="key" value="@ViewBag.Key" lock />
+                <div class="uk-margin">
+                    <button id="btnSubmit" type="submit" class="uk-button uk-button-primary">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/upload")
+    @Scripts.Render("~/scripts/editor")
+    <script type="text/javascript" src="/scripts/app/site/app.page.js"></script>
+}

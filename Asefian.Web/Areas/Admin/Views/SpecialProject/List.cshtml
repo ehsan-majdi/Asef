@@ -1,0 +1,285 @@
+﻿@{
+    ViewBag.Title = "لیست پروژه های خاص";
+}
+@Styles.Render("~/styles/fancy")
+<style>
+    .gallery-add-file, .gallery-file {
+        width: 120px;
+        height: 120px;
+        background-size: contain;
+        background-color: transparent;
+    }
+
+    .add-file i {
+        color: grey
+    }
+
+    .gallery-del-icon {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 15px;
+        bottom: 0;
+        text-align: center;
+        border-radius: 4px
+    }
+
+        .gallery-del-icon i {
+            color: red
+        }
+
+    .gallery-edit-icon {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 109px;
+        bottom: 0;
+        text-align: center;
+        border-radius: 4px
+    }
+
+        .gallery-edit-icon i {
+            color: green
+        }
+
+    #list {
+        padding: 10px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .item {
+        background-color: white;
+        height: 100%;
+    }
+
+        .item label {
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .item .uk-card-header {
+            padding: 0 0 15px 0;
+        }
+
+    .uk-card-title {
+        margin-bottom: 5px;
+    }
+
+    .item-container {
+        overflow-y: auto;
+        max-height: 185px;
+    }
+
+    .uk-checkbox, .uk-radio {
+        margin-top: 0px;
+        margin-left: 3px;
+    }
+
+    .item-color {
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .uk-table td {
+        padding: 0;
+        vertical-align: middle
+    }
+</style>
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/specialProject/list">لیست پروژه های خاص</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-margin">
+            <a href="/admin/specialProject/add" class="uk-button uk-button-primary"><i class="far fa-plus v-middle"></i>&nbsp; جدید</a>
+        </div>
+        <div id="search-form">
+            <input type="text" class="uk-input search" placeholder="عبارت جستجو" name="word" />
+        </div>
+        <div id="list" class="m-top-20" data-url="/admin/specialProject/search"></div>
+    </div>
+</div>
+<div id="gallery-modal" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">گالری</h2>
+        </div>
+        <div class="uk-modal-body">
+            <div class="content">
+                <div>
+                    <div class="uk-width-1-1@s uk-width-1-1@m uk-width-1-1@l">
+                        <hr class="uk-divider-icon">
+                    </div>
+
+                </div>
+                <div id="gallery-list" class="m-top-20 list" data-url="">
+                </div>
+            </div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">بستن</button>
+        </div>
+    </div>
+</div>
+<div id="addImage-modal" uk-modal>
+    <div class="uk-modal-dialog">
+        <form id="frmAddProjectGallery" action="/admin/specialProject/addImage" data-success="addspecialProjectImageSuccess">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">تصویر</h2>
+            </div>
+            <input type="hidden" name="id" id="hiddenId" />
+            <div class="uk-modal-body">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtFileName">تصویر</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-image"></i></span>
+                            <input id="hiddenFileId" type="hidden" name="fileId" />
+                            <input id="txtFileName" class="uk-input input-ltr-left-icon" type="text" name="fileName" readonly />
+                            <input id="file" type="file" class="hide" />
+                            <span id="upload" class="form-icon"><i class="fal fa-upload"></i></span>
+                            <span id="clearFile" class="form-icon hide"><i class="fal fa-times"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="cmbStatus">وضعیت</label>
+                    <div class="uk-form-controls">
+                        <select id="cmbStatus" class="uk-select" name="statusId" data-validate="required">
+                            <option value="">...</option>
+                            <option value="1">فعال</option>
+                            <option value="2">غیر فعال</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-width-1-1@m uk-margin-medium-top">
+                    <ul uk-tab="connect: #translationList">
+                        @foreach (var item in Asefian.Model.Context.Language.GetList())
+                        {
+                            <li><a href="#">@item.PersianTitle</a></li>
+                        }
+                    </ul>
+                    <ul id="translationList" class="uk-switcher uk-margin" data-list="translations">
+                        @foreach (var item in Asefian.Model.Context.Language.GetList())
+                        {
+                            <li data-list-form>
+                                <input name="languageId" type="hidden" value="@item.Id" key lock />
+                                <label>عنوان</label>
+                                <div class="uk-inline uk-width-1-1">
+                                    <span class="uk-form-icon"><i class="fal fa-heading"></i></span>
+                                    <input class="uk-input" type="text" name="title" data-validate="required" />
+                                </div>
+                                <div class="uk-margin">
+                                    <label>توضیحات</label>
+                                    <div class="uk-inline uk-width-1-1 ">
+                                        <span class="uk-form-icon"><i class="fal fa-heading"></i></span>
+                                        <input class="uk-input" type="text" name="description" data-validate="required" />
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <br />
+        </form>
+        <div class="uk-modal-footer uk-text-right">
+            <button id="btnAddProjectGallery" class="uk-button uk-button-primary" type="button">ذخیره</button>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">بستن</button>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/scripts/fancy")
+    @Scripts.Render("~/scripts/upload")
+    <script type="text/javascript" src="/scripts/app/specialProject/app.list.js"></script>
+
+    <script id="template" type="text/x-jsrender">
+        {{if list.length > 0}}
+        <div>
+            <table class="uk-table uk-table-striped">
+                <thead>
+                    <tr>
+                        <th class="txt-al-c w50">ترتیب</th>
+                        <th>نام</th>
+                        <th>تصویر</th>
+                        <th class="w85 txt-al-c">عکس ها</th>
+                        <th class="w85 txt-al-c">وضعیت</th>
+                        <th class="txt-al-c w85">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{for list}}
+                    <tr class="specialProjectRow" data-id="{{:id}}">
+                        <td class="txt-al-c">{{:#index + 1}}</td>
+                        <td class="txt-al-r">
+                            <div class="col-pad-top">{{:sku}}</div>
+                        </td>
+                        <td class="txt-al-r">
+                            <img style="width:60px" src="/upload/image/100x100/{{:fileId}}/{{:fileName}}" />
+                        </td>
+                        <td uk-toggle="target:#gallery-modal" class="w20 txt-al-c addGallery" data-id="{{:id}}">
+                            {{if galleryCount > 0}}
+                            <i style="color:green" class="fa fa-check"></i>
+                            {{else}}
+                            <i style="color:red" class="fa fa-times"></i>
+                            {{/if}}
+                        </td>
+                        <td>
+                            <div class="col-pad-top txt-al-c">
+                                {{if statusId == 1}}
+                                <span class="uk-label uk-label-success">{{:statusTitle}}</span>
+                                {{else statusId == 2}}
+                                <span class="uk-label uk-label-danger">{{:statusTitle}}</span>
+                                {{/if}}
+                            </div>
+                        </td>
+                        <td class="txt-al-c">
+                            <a href="/admin/specialProject/edit/{{:id}}" uk-tooltip="ویرایش"><i class="far fa-pencil operation-icon green"></i></a>
+                            <a href="#" class="delete" data-delete-url="/admin/specialProject/delete/{{:id}}" uk-tooltip="حذف"><i class="far fa-trash-alt operation-icon red"></i></a>
+                        </td>
+                    </tr>
+                    {{/for}}
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("_Pagination")
+        {{else}}
+        <h5 class="txt-al-c">موردی یافت نشد.</h5>
+        {{/if}}
+    </script>
+    <script id="gallery-template" type="text/x-jsrender">
+        <ul class="uk-thumbnav" uk-margin>
+            {{for list}}
+            <li class="relative">
+                <a href="{{:link}}" class="gallery-file uk-background-cover uk-inline" title="{{:fileName}}" style="color:black;text-decoration:none;background-image: url('{{:link}}')">
+                    <span>{{:sku}}</span>
+                    <div class="uk-position-cover"></div>
+                </a>
+                <a href="#" class="gallery-del-icon removeGalleryFile" data-id="{{:id}}"><i class="far fa-trash-alt m-top-7"></i></a>
+                @*<a href="#" uk-toggle="target:#addImage-modal"  class="gallery-edit-icon editGalleryFile" data-id="{{:id}}"><i class="far fa-pencil-alt m-top-7"></i></a>*@
+            </li>
+            {{/for}}
+            <li>
+                <a href="#" uk-toggle="target:#addImage-modal" class="add add-file">
+                    <div class="uk-inline uk-dark">
+                        <div class="gallery-add-file"></div>
+                        <div class="uk-overlay-default uk-position-cover">
+                            <div class="uk-position-center"><i class="fas fa-plus fa-3x white"></i></div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </script>
+}

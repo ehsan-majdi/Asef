@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{516EC39B-68A5-4080-8F13-9E0DE5D53FB4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Asefian.Model</RootNamespace>
+    <AssemblyName>Asefian.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\BaseEnum.cs" />
+    <Compile Include="Common\SaveFile.cs" />
+    <Compile Include="Common\SelectOption.cs" />
+    <Compile Include="Context\Account\Enum\BalanceType.cs" />
+    <Compile Include="Context\Account\Enum\Browser.cs" />
+    <Compile Include="Context\Account\Enum\DeviceType.cs" />
+    <Compile Include="Context\Account\Enum\GroupStatus.cs" />
+    <Compile Include="Context\Account\Enum\NotificationStatus.cs" />
+    <Compile Include="Context\Account\Enum\NotificationType.cs" />
+    <Compile Include="Context\Account\Enum\OperatingSystem.cs" />
+    <Compile Include="Context\Account\Enum\Sex.cs" />
+    <Compile Include="Context\Account\Enum\TokenType.cs" />
+    <Compile Include="Context\Account\Enum\UserAddressStatus.cs" />
+    <Compile Include="Context\Account\Enum\UserFavoriteFolderStatus.cs" />
+    <Compile Include="Context\Account\Enum\UserFavoriteStatus.cs" />
+    <Compile Include="Context\Account\Enum\UserNotificationStatus.cs" />
+    <Compile Include="Context\Account\Enum\UserStatus.cs" />
+    <Compile Include="Context\Account\Enum\UserType.cs" />
+    <Compile Include="Context\Account\Group.cs" />
+    <Compile Include="Context\Account\Notification.cs" />
+    <Compile Include="Context\Account\Token.cs" />
+    <Compile Include="Context\Account\User.cs" />
+    <Compile Include="Context\Account\UserAddress.cs" />
+    <Compile Include="Context\Account\UserBalanceLog.cs" />
+    <Compile Include="Context\Account\UserFavorite.cs" />
+    <Compile Include="Context\Account\UserFavoriteFolder.cs" />
+    <Compile Include="Context\Account\UserGroup.cs" />
+    <Compile Include="Context\Account\UserNotification.cs" />
+    <Compile Include="Context\Account\UserVerifyToken.cs" />
+    <Compile Include="Context\AsefianContext.cs" />
+    <Compile Include="Context\AsefianContextInitializer.cs" />
+    <Compile Include="Context\Blog\Article.cs" />
+    <Compile Include="Context\Blog\ArticleFile.cs" />
+    <Compile Include="Context\Blog\ArticleTranslation.cs" />
+    <Compile Include="Context\Blog\Enum\ArticleFileStatus.cs" />
+    <Compile Include="Context\Blog\Enum\ArticleStatus.cs" />
+    <Compile Include="Context\Blog\Enum\NewsStatus.cs" />
+    <Compile Include="Context\Blog\News.cs" />
+    <Compile Include="Context\Blog\NewsTranslation.cs" />
+    <Compile Include="Context\Core\BaseInformation.cs" />
+    <Compile Include="Context\Core\Branch.cs" />
+    <Compile Include="Context\Core\BranchTranslation.cs" />
+    <Compile Include="Context\Core\Enum\BranchStatus.cs" />
+    <Compile Include="Context\Core\Enum\LocationType.cs" />
+    <Compile Include="Context\Core\Enum\SliderContentStatus.cs" />
+    <Compile Include="Context\Core\Enum\SliderStatus.cs" />
+    <Compile Include="Context\Core\Enum\SliderType.cs" />
+    <Compile Include="Context\Core\Location.cs" />
+    <Compile Include="Context\Core\Slider.cs" />
+    <Compile Include="Context\Core\SliderContent.cs" />
+    <Compile Include="Context\Core\SliderTranslation.cs" />
+    <Compile Include="Context\Data\AboutUs.cs" />
+    <Compile Include="Context\Data\AboutUsTranslation.cs" />
+    <Compile Include="Context\Data\Brand.cs" />
+    <Compile Include="Context\Data\BrandTranslation.cs" />
+    <Compile Include="Context\Data\Category.cs" />
+    <Compile Include="Context\Data\CategoryFeature.cs" />
+    <Compile Include="Context\Data\CategoryFeatureTranslation.cs" />
+    <Compile Include="Context\Data\CategoryFeatureValue.cs" />
+    <Compile Include="Context\Data\CategoryFeatureValueTranslation.cs" />
+    <Compile Include="Context\Data\CategoryTranslation.cs" />
+    <Compile Include="Context\Data\ContactUs.cs" />
+    <Compile Include="Context\Data\ContactUsTranslation.cs" />
+    <Compile Include="Context\Data\Enum\AboutUs.cs" />
+    <Compile Include="Context\Data\Enum\BrandStatus.cs" />
+    <Compile Include="Context\Data\Enum\CategoryFeatureStatus.cs" />
+    <Compile Include="Context\Data\Enum\CategoryFeatureType.cs" />
+    <Compile Include="Context\Data\Enum\CategoryStatus.cs" />
+    <Compile Include="Context\Data\Enum\CategoryType.cs" />
+    <Compile Include="Context\Data\Enum\ContactUsStatus.cs" />
+    <Compile Include="Context\Data\Enum\DownloadCenterStatus.cs" />
+    <Compile Include="Context\Data\Enum\ExportStatus.cs" />
+    <Compile Include="Context\Data\Enum\ProductFileStatus.cs" />
+    <Compile Include="Context\Data\Enum\ProductFileType.cs" />
+    <Compile Include="Context\Data\Enum\ProductFilterStatus.cs" />
+    <Compile Include="Context\Data\Enum\ProductFilterType.cs" />
+    <Compile Include="Context\Data\Enum\ProductFilterValueStatus.cs" />
+    <Compile Include="Context\Data\Enum\ProductStatus.cs" />
+    <Compile Include="Context\Data\Enum\ServiceStatus.cs" />
+    <Compile Include="Context\Data\Enum\SpecialProjectFileStatus.cs" />
+    <Compile Include="Context\Data\Enum\SpecialProjectStatus.cs" />
+    <Compile Include="Context\Data\Export.cs" />
+    <Compile Include="Context\Data\ExportTranslation.cs" />
+    <Compile Include="Context\Data\Product.cs" />
+    <Compile Include="Context\Data\ProductFeature.cs" />
+    <Compile Include="Context\Data\ProductFile.cs" />
+    <Compile Include="Context\Data\ProductFilter.cs" />
+    <Compile Include="Context\Data\ProductFilterData.cs" />
+    <Compile Include="Context\Data\ProductFilterTranslation.cs" />
+    <Compile Include="Context\Data\ProductFilterValue.cs" />
+    <Compile Include="Context\Data\ProductFilterValueTranslation.cs" />
+    <Compile Include="Context\Data\ProductTranslation.cs" />
+    <Compile Include="Context\Data\Service.cs" />
+    <Compile Include="Context\Data\ServiceTranslation.cs" />
+    <Compile Include="Context\Data\SpecialProject.cs" />
+    <Compile Include="Context\Data\SpecialProjectFile.cs" />
+    <Compile Include="Context\Data\SpecialProjectFileTranslation.cs" />
+    <Compile Include="Context\Data\SpecialProjectTranslation.cs" />
+    <Compile Include="Context\Financial\Cart.cs" />
+    <Compile Include="Context\Financial\Coupon.cs" />
+    <Compile Include="Context\Financial\Enum\CouponStatus.cs" />
+    <Compile Include="Context\Financial\Enum\CouponType.cs" />
+    <Compile Include="Context\Financial\Enum\DeliveryType.cs" />
+    <Compile Include="Context\Financial\Enum\InquiryStatus.cs" />
+    <Compile Include="Context\Financial\Enum\InvoiceDetailStatus.cs" />
+    <Compile Include="Context\Financial\Enum\InvoiceStatus.cs" />
+    <Compile Include="Context\Financial\Enum\PaymentType.cs" />
+    <Compile Include="Context\Financial\Inquiry.cs" />
+    <Compile Include="Context\Financial\InquiryCart.cs" />
+    <Compile Include="Context\Financial\InquiryItem.cs" />
+    <Compile Include="Context\Financial\Invoice.cs" />
+    <Compile Include="Context\Financial\InvoiceDetail.cs" />
+    <Compile Include="Context\Financial\InvoiceLog.cs" />
+    <Compile Include="Context\Financial\InvoiceTransaction.cs" />
+    <Compile Include="Context\Language.cs" />
+    <Compile Include="Context\Support\Enum\FaqCategoryStatus.cs" />
+    <Compile Include="Context\Support\Enum\FaqStatus.cs" />
+    <Compile Include="Context\Support\Enum\MessageBoxStatus.cs" />
+    <Compile Include="Context\Support\Enum\MessageType.cs" />
+    <Compile Include="Context\Support\Enum\NewsLetterStatus.cs" />
+    <Compile Include="Context\Support\Enum\TicketMessageType.cs" />
+    <Compile Include="Context\Support\Enum\TicketPriority.cs" />
+    <Compile Include="Context\Support\Enum\TicketStatus.cs" />
+    <Compile Include="Context\Support\Faq.cs" />
+    <Compile Include="Context\Support\FaqCategory.cs" />
+    <Compile Include="Context\Support\MessageBox.cs" />
+    <Compile Include="Context\Support\NewsLetter.cs" />
+    <Compile Include="Context\Support\Ticket.cs" />
+    <Compile Include="Context\Support\TicketMessage.cs" />
+    <Compile Include="FileContext\AsefianFileContext.cs" />
+    <Compile Include="FileContext\AsefianFileContextHelper.cs" />
+    <Compile Include="FileContext\AsefianFileContextInitializer.cs" />
+    <Compile Include="FileContext\Entity\File.cs" />
+    <Compile Include="FileContext\Enum\FileStatus.cs" />
+    <Compile Include="Metadata\BaseInformationKey.cs" />
+    <Compile Include="Metadata\AsefianMetadata.cs" />
+    <Compile Include="Metadata\NotificationKey.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\Account\AssignGroupViewModel.cs" />
+    <Compile Include="ViewModel\Account\GroupViewModel.cs" />
+    <Compile Include="ViewModel\Account\NotificationViewModel.cs" />
+    <Compile Include="ViewModel\Account\UserPrincipal.cs" />
+    <Compile Include="ViewModel\Account\UserViewModel.cs" />
+    <Compile Include="ViewModel\Blog\ArticleViewModel.cs" />
+    <Compile Include="ViewModel\Blog\NewsViewModel.cs" />
+    <Compile Include="ViewModel\Core\BaseInformationViewModel.cs" />
+    <Compile Include="ViewModel\Core\BranchViewModel.cs" />
+    <Compile Include="ViewModel\Core\LocationViewModel.cs" />
+    <Compile Include="ViewModel\Core\SliderViewModel.cs" />
+    <Compile Include="ViewModel\Data\AboutUsViewModel.cs" />
+    <Compile Include="ViewModel\Data\AddDescriptionViewModel.cs" />
+    <Compile Include="ViewModel\Data\AddProductImageViewModel.cs" />
+    <Compile Include="ViewModel\Data\BrandViewModel.cs" />
+    <Compile Include="ViewModel\Data\CategoryFeatureViewModel.cs" />
+    <Compile Include="ViewModel\Data\CategoryViewModel.cs" />
+    <Compile Include="ViewModel\Data\CouponViewModel.cs" />
+    <Compile Include="ViewModel\Data\DownloadCenterViewModel.cs" />
+    <Compile Include="ViewModel\Data\ProductFilterViewModel.cs" />
+    <Compile Include="ViewModel\Data\ProductViewModel.cs" />
+    <Compile Include="ViewModel\Data\ServiceViewModel.cs" />
+    <Compile Include="ViewModel\Data\SpecialProjectViewModel.cs" />
+    <Compile Include="ViewModel\Financial\CartViewModel.cs" />
+    <Compile Include="ViewModel\Financial\CouponViewModel.cs" />
+    <Compile Include="ViewModel\Financial\DocumentEntryViewModel.cs" />
+    <Compile Include="ViewModel\Financial\DocumentExitViewModel.cs" />
+    <Compile Include="ViewModel\Financial\InquiryViewModel.cs" />
+    <Compile Include="ViewModel\Financial\InvoiceViewModel.cs" />
+    <Compile Include="ViewModel\Support\FaqCategoryViewModel.cs" />
+    <Compile Include="ViewModel\Support\FaqViewModel.cs" />
+    <Compile Include="ViewModel\Support\MessageBoxViewModel.cs" />
+    <Compile Include="ViewModel\Support\NewsletterViewModel.cs" />
+    <Compile Include="ViewModel\Support\TicketViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Asefian.Common\Asefian.Common.csproj">
+      <Project>{c9e4288e-1135-466b-851c-08921f82d392}</Project>
+      <Name>Asefian.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,104 @@
+html {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+h1, .uk-h1, h2, .uk-h2, h3, .uk-h3, h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
+    font-family: 'iranyekan', 'IRANSans', serif;
+}
+
+p {
+    line-height: 28px;
+}
+
+.uk-button {
+    font-size: 12px;
+}
+
+.uk-form-label {
+    font-size: 1rem;
+    margin-bottom: 3px;
+    display: inline-block;
+}
+
+.uk-notification-message, .uk-navbar-nav > li > a, .uk-navbar-item, .uk-navbar-toggle {
+    font-size: 1rem;
+}
+
+.uk-notification-message-danger {
+    background-color: #f0506e;
+    color: white;
+}
+
+    .uk-notification-message-danger .uk-close, .uk-notification-message-danger .uk-close:hover, .uk-notification-message-danger .uk-close:focus {
+        color: white;
+    }
+
+.uk-notification-message-warning {
+    background-color: #faa05a;
+    color: white;
+}
+
+    .uk-notification-message-warning .uk-close, .uk-notification-message-warning .uk-close:hover, .uk-notification-message-warning .uk-close:focus {
+        color: white;
+    }
+
+
+.uk-notification-message-success {
+    background-color: #388e3c;
+    color: white;
+}
+
+    .uk-notification-message-success .uk-close, .uk-notification-message-success .uk-close:hover, .uk-notification-message-success .uk-close:focus {
+        color: white;
+    }
+
+.uk-button-default:disabled, .uk-button-primary:disabled, .uk-button-secondary:disabled, .uk-button-danger:disabled {
+    background-color: #0f7ae5;
+    color: #fff;
+}
+
+.uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before {
+    margin: 0 10px;
+}
+
+.uk-table th {
+    font-size: 1rem;
+}
+
+@media (min-width: 1200px) {
+    .uk-card-body {
+        padding: 20px;
+    }
+
+    .uk-card-header {
+        padding: 20px;
+    }
+
+    .uk-card-footer {
+        padding: 20px;
+    }
+}
+
+
+.uk-navbar-toggle {
+    color: #FFF;
+}
+
+.uk-search-navbar .uk-search-input {
+    color: #FFF;
+    font-size: 1.2rem;
+}
+
+    .uk-search-navbar .uk-search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #EEE;
+        opacity: 1; /* Firefox */
+    }
+
+    .uk-search-navbar .uk-search-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #EEE;
+    }
+
+    .uk-search-navbar .uk-search-input::-ms-input-placeholder { /* Microsoft Edge */
+        color: #EEE;
+    }

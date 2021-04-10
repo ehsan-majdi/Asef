@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "لیست محصولات";
+}
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/invoice/list">لیست سفارشات</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div id="search-form">
+            <input type="text" class="uk-input search" placeholder="عبارت جستجو" name="word" />
+        </div>
+        <div id="list" class="m-top-20" data-url="/admin/invoice/search"></div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="/scripts/app/invoice/app.list.js"></script>
+
+    <script id="template" type="text/x-jsrender">
+        {{if list.length > 0}}
+        <div>
+            <table class="uk-table uk-table-striped">
+                <thead>
+                    <tr>
+                        <th class="txt-al-c w50">ترتیب</th>
+                        <th class="txt-al-c">شماره فاکتور</th>
+                        <th class="txt-al-c">تاریخ</th>
+                        <th>نام خریدار</th>
+                        <th class="txt-al-c">قیمت</th>
+                        <th class="txt-al-c">قابل پرداخت</th>
+                        <th class="w85 txt-al-c">وضعیت</th>
+                        <th class="txt-al-c w85">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{for list}}
+                    <tr>
+                        <td class="txt-al-c">{{:#index + 1}}</td>
+                        <td class="txt-al-c">
+                            <div class="col-pad-top">{{:invoiceNo}}</div>
+                        </td>
+                        <td class="txt-al-c">
+                            <div class="col-pad-top ltr">{{:persianDate}}</div>
+                        </td>
+                        <td class="txt-al-r">
+                            <div class="col-pad-top">{{:fullName}}</div>
+                        </td>
+                        <td>
+                            <div class="col-pad-top txt-al-c">
+                                <div class="col-pad-top">{{:~seperatorFa(price)}} @Asefian.Model.Metadata.AsefianMetadata.CurrencyName</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-pad-top txt-al-c">
+                                <div class="col-pad-top">{{:~seperatorFa(unpaidPrice)}} @Asefian.Model.Metadata.AsefianMetadata.CurrencyName</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-pad-top txt-al-c">
+                                {{if invoiceStatusId == 1 || invoiceStatusId == 2 || invoiceStatusId == 3 || invoiceStatusId == 4 || invoiceStatusId == 5}}
+                                <span class="uk-label bg-blue">{{:invoiceStatusTitle}}</span>
+                                {{else invoiceStatusId == 6 || invoiceStatusId == 7}}
+                                <span class="uk-label bg-green">{{:invoiceStatusTitle}}</span>
+                                {{else invoiceStatusId == 8 || invoiceStatusId == 9}}
+                                <span class="uk-label bg-red">{{:invoiceStatusTitle}}</span>
+                                {{/if}}
+
+                            </div>
+                        </td>
+                        <td class="txt-al-c">
+                            <a href="/admin/invoice/detail/{{:id}}" uk-tooltip="جزئیات"><i class="far fa-list operation-icon blue"></i></a>
+                        </td>
+                    </tr>
+                    {{/for}}
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("_Pagination")
+        {{else}}
+        <h5 class="txt-al-c">موردی یافت نشد.</h5>
+        {{/if}}
+    </script>
+}

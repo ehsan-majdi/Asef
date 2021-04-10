@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>@ViewBag.Title - لوسترآصفیان</title>
+    @Styles.Render("~/styles/core")
+    @if (BaseController.GetLanguage() == Asefian.Model.Context.Language.English)
+    {
+        @Styles.Render("~/styles/uikit")
+    }
+    else
+    {
+        @Styles.Render("~/styles/uikit-rtl")
+    }
+    @Styles.Render("~/styles/web")
+    @Styles.Render("~/styles/scroll")
+    @Styles.Render("~/styles/auto")
+    @Styles.Render("~/styles/leaflet")
+
+    @if (BaseController.GetLanguage() == Asefian.Model.Context.Language.English)
+    {
+        <text >
+        <style>
+            * {
+                direction: ltr;
+            }
+        </style>
+        </text>
+    }
+    else
+    {
+        <text >
+        <style>
+            * {
+                direction: rtl;
+            }
+        </style>
+        </text>
+    }
+</head>
+
+<body>
+    <div class="uk-width-1-1@s">
+        <div class="slogan-asefian" data-uk-sticky>
+            <a href="@BaseController.MakeLanguageUrl("/home")" class="uk-text-center">@Asefian.Web.Resource.Translation.AsefiBrandOfIranianChandeliers</a>
+        </div>
+    </div>
+    <div class="uk-container uk-visible@m">
+        <nav class="uk-navbar-container nav-mainpage distance" uk-navbar>
+            <div class="uk-navbar-center" style="width:124px;margin:5px auto;">
+                <div class="uk-flex uk-flex-column">
+                    <div class="uk-text-center">
+                        <a class="uk-logo" href="@BaseController.MakeLanguageUrl("/home")">
+                            @if (BaseController.GetLanguage() == Asefian.Model.Context.Language.Persian)
+                            {
+                                <img class="header-logo" style="max-width:145px" src="~/images/LogoFA.jpg" />
+                            }
+                            else
+                            {
+                                <img class="header-logo" style="width:136px" src="~/Images/LogoEN.png" />
+                            }
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-navbar-left">
+                @Html.Action("_LanguageRequestPath", "Home")
+                <div class="language-type">
+                    <ul class="uk-navbar-nav ">
+                        <li>
+                        </li>
+                        <li>
+                            @if (Request.IsAuthenticated)
+                            {
+                                <a class="nav-overlay uk-navbar-toggle" href="@BaseController.MakeLanguageUrl("/profile")">
+                                    <i class="fal fa-user"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="nav-overlay uk-navbar-toggle" href="/login">
+                                    <i class="fal fa-user"></i>
+                                </a>
+                            }
+                        </li>
+                        <li>
+                            <a class="nav-overlay uk-navbar-toggle uk-disabled" href="/inquiry">
+                                <i class="fal fa-shopping-cart"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            @if (Request.IsAuthenticated)
+                            {
+                                <a class="nav-overlay uk-navbar-toggle" href="/logout">
+                                    <i class="fal fa-sign-out white fa-flip-horizontal"></i>
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="menu-bar uk-visible@m" uk-sticky="offset: 30">
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-center">
+                <ul class="nav-overlay uk-navbar-nav uk-width-1-1@s">
+                    <li><a href="@BaseController.MakeLanguageUrl("/shop")">@Asefian.Web.Resource.Translation.Shop</a></li>
+                    <li><a href="@BaseController.MakeLanguageUrl("/workWithUs")">@Asefian.Web.Resource.Translation.WorkWithUs</a></li>
+                    <li><a href="@BaseController.MakeLanguageUrl("/specialProject")">@Asefian.Web.Resource.Translation.SpecialProject</a></li>
+                    <li><a href="@BaseController.MakeLanguageUrl("/aboutus")">@Asefian.Web.Resource.Translation.AboutUs</a></li>
+                    <li><a href="@BaseController.MakeLanguageUrl("/contactus")">@Asefian.Web.Resource.Translation.ContactUs</a></li>
+                    <li><a href="@BaseController.MakeLanguageUrl("/news")">@Asefian.Web.Resource.Translation.News</a></li>
+                    <li class="button-search"><a href="#"><i class="fal fa-search white " style="margin-right:5px;"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-center">
+                <div class="">
+                    <input class="uk-input txtHeaderSearch" type="search" placeholder="@Asefian.Web.Resource.Translation.Search" autofocus style="position:relative" name="term" />
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="uk-hidden@m" uk-sticky>
+        <div class="nav-menu">
+            <div id="nav-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <ul class="nav-overlay uk-navbar-nav showHideList ">
+            <li><a href="@BaseController.MakeLanguageUrl("/shop")">@Asefian.Web.Resource.Translation.Shop</a></li>
+            <li><a href="@BaseController.MakeLanguageUrl("/workWithUs")">@Asefian.Web.Resource.Translation.WorkWithUs</a></li>
+            <li><a href="@BaseController.MakeLanguageUrl("/specialProject")">@Asefian.Web.Resource.Translation.SpecialProject</a></li>
+            <li><a href="@BaseController.MakeLanguageUrl("/aboutus")">@Asefian.Web.Resource.Translation.AboutUs</a></li>
+            <li><a href="@BaseController.MakeLanguageUrl("/contactus")">@Asefian.Web.Resource.Translation.ContactUs</a></li>
+            <li class="button-search">
+            </li>
+        </ul>
+
+    </div>
+    <div class="uk-hidden@m">
+        <div class="uk-position-relative particular-menu">
+            <ul class="nav-overlay uk-navbar-nav">
+                <li>
+                    <a id="lnkMakeCall" class="nav-overlay uk-navbar-toggle" href="tel:02177713877">
+                        <i class="fal fa-phone white"></i>
+                    </a>
+                </li>
+                <li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <a class="nav-overlay uk-navbar-toggle" href="/profile">
+                            <i class="fal fa-user white"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="nav-overlay uk-navbar-toggle" href="/login">
+                            <i class="fal fa-user white"></i>
+                        </a>
+                    }
+                </li>
+                <li>
+                    <a class="nav-overlay uk-navbar-toggle" href="/#">
+                        <i class="fal fa-shopping-cart white"></i>
+                    </a>
+                </li>
+                <li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <a class="nav-overlay uk-navbar-toggle" href="/logout">
+                            <i class="fal fa-sign-out white fa-flip-horizontal"></i>
+                        </a>
+                    }
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="uk-hidden@m uk-text-center uk-margin">
+        <form class="uk-search uk-search-default uk-width-1-1">
+            <a uk-search-icon></a>
+            <input class="uk-search-input" type="search" placeholder="@Asefian.Web.Resource.Translation.Search">
+        </form>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <div id="footer">
+        <div class="uk-container">
+            <div class="uk-grid" uk-grid>
+                <div class="uk-width-1-1@s uk-width-1-2@m uk-width-1-5@l">
+                    <h4 class="site-title">@Asefian.Web.Resource.Translation.ShoppingGuide</h4>
+                    <ul class="uk-nav customer-services">
+                        <li><a href="#">@Asefian.Web.Resource.Translation.InternetBusiness</a></li>
+                        <li><a href="#">@Asefian.Web.Resource.Translation.SubmitOrder</a></li>
+                        <li><a href="#">@Asefian.Web.Resource.Translation.TrackingOrders</a></li>
+                        <li><a href="#">@Asefian.Web.Resource.Translation.Payments</a></li>
+                        <li><a href="#">@Asefian.Web.Resource.Translation.Order</a></li>
+                        <li><a href="@BaseController.MakeLanguageUrl("/designer")">@Asefian.Web.Resource.Translation.Designer</a></li>
+                    </ul>
+                </div>
+
+                <div class="uk-width-1-1@s uk-width-1-2@m uk-width-1-5@l">
+                    <h4 class="site-title">@Asefian.Web.Resource.Translation.CustomerServices</h4>
+                    <ul class="uk-nav customer-services">
+                        <li><a href="#">@Asefian.Web.Resource.Translation.CommonQuestions</a></li>
+                        <li><a href="#">@Asefian.Web.Resource.Translation.Procedure</a></li>
+                        <li><a href="#">@Asefian.Web.Resource.Translation.Warranty</a></li>
+                        <li><a href="#">@Asefian.Web.Resource.Translation.SendMessage</a></li>
+                        <li><a href="@BaseController.MakeLanguageUrl("/export")">@Asefian.Web.Resource.Translation.Export</a></li>
+                        <li><a href="@BaseController.MakeLanguageUrl("/solicitorship")">@Asefian.Web.Resource.Translation.Solicitorship</a></li>
+                    </ul>
+                </div>
+
+                <div class="uk-width-1-1@s uk-width-1-2@m uk-width-1-5@l">
+                    @Html.Action("_SiteInfoFooter", new { controller = "Home" })
+                </div>
+
+                <div class="uk-width-1-1@s uk-width-1-2@m uk-width-2-5@l">
+                    @Html.Action("_Map", new { controller = "Home" })
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="uk-width-1-1">
+        <div class="uk-grid copy-right text-center" style="padding:5px 30px">
+            <div class="uk-width-1-3@l uk-width-1-1@s uk-text-center">
+                @Html.Action("_SiteSocialNetwork", new { controller = "Home" })
+            </div>
+            <div class="uk-text-center uk-width-1-3@l uk-width-1-1@s">
+                <a class="kia-tech-sign" href="http://www.asefian.com">@Asefian.Web.Resource.Translation.Reserved</a>
+                <br />
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/scripts/web")
+    @Scripts.Render("~/scripts/scroll")
+    @Scripts.Render("~/scripts/auto")
+    @Scripts.Render("~/scripts/leaflet")
+    <script src="/scripts/site/main.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

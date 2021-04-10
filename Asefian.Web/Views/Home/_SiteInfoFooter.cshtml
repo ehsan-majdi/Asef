@@ -1,0 +1,70 @@
+﻿@model List<Asefian.Model.Context.Core.BaseInformation>
+
+@if (Model.Count(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteFax) > 0)
+{
+    var telephone = @Model.Single(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteFax).Value.Split('%');
+
+    <div>
+        <h4 class="site-title uk-margin">@Asefian.Web.Resource.Translation.ContactUs</h4>
+        <text> <b>@Asefian.Web.Resource.Translation.Fax:</b> </text>
+        @foreach (var item in telephone)
+        {
+            if (BaseController.GetLanguage().Id == Asefian.Model.Context.Language.Persian.Id)
+            {
+                <text><div><tel id="phoneNumber" data-value="@item">@item.ToPersianNumber()</tel></div></text>
+            }
+            else
+            {
+                <text><div><tel id="phoneNumber" data-value="@item">@item</tel></div></text>
+            }
+        }
+    </div>
+}
+
+<div>
+    @if (Model.Count(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteAddress) > 0)
+    {
+        <div>
+            @if (BaseController.GetLanguage().Id == Asefian.Model.Context.Language.Persian.Id)
+            {
+                <b class="uk-margin">آدرس فروشگاه مرکزی:</b>
+                <br/>
+                <span class="site-text uk-margin">
+                    @Model.Single(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteAddress && x.LanguageId == BaseController.GetLanguage().Id).Value.ToPersianNumber()
+                </span>
+            }
+            else
+            {
+                <b class="">Store Address:</b>
+                <span class="site-text uk-margin">
+                    @Model.Single(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteAddress && x.LanguageId == BaseController.GetLanguage().Id).Value
+                </span>
+            }
+        </div>
+    }
+</div>
+
+<div>
+    @if (Model.Count(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteEmail) > 0)
+    {
+        <div>
+            @if (BaseController.GetLanguage().Id == Asefian.Model.Context.Language.Persian.Id)
+            {
+                <b class="uk-margin">ایمیل:</b>
+                <span class="site-text uk-margin">
+                    @Model.Single(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteEmail).Value.ToPersianNumber()
+                </span>
+            }
+            else
+            {
+                <b class="">Email:</b>
+                <span class="site-text uk-margin">
+                    @Model.Single(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteEmail).Value
+                </span>
+            }
+        </div>
+    }
+</div>
+
+
+

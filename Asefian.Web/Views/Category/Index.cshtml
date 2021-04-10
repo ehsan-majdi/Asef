@@ -1,0 +1,53 @@
+﻿@model Asefian.Model.Context.Data.Category
+@{
+
+}
+
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="@BaseController.MakeLanguageUrl("/home")/"><i class="fal fa-home"></i></a></li>
+            <li><a href="@BaseController.MakeLanguageUrl("/shop")/">محصولات</a></li>
+            @if (Model.Parent != null && Model.Parent.Parent != null)
+            {
+                <li><a href="/category/@Model.Parent.ParentId/@Model.Parent.Parent.Sku.ToUrlString()">@Model.Parent.Parent.Sku</a></li>
+            }
+            @if (Model.Parent != null)
+            {
+                <li><a href="/category/@Model.ParentId/@Model.Parent.Sku.ToUrlString()">@Model.Parent.Sku</a></li>
+            }
+            <li><span>@ViewBag.Title</span></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div id="main-page-container" class="relative">
+            <div uk-grid>
+                <div class="uk-width-1-1" id="list" data-url="@BaseController.MakeLanguageUrl("/product/search")" method="post" count="48"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+             $("#list").list({
+                entity: {
+                    categoryId: @Model.Id,
+                    count: 48,
+                    page: 0,
+                 },
+                 success: function () {
+                    $('.grid').packery({
+                        itemSelector: '.grid-item',
+                        gutter: 0,
+                        originLeft: false
+                    });
+                },
+            });
+        });
+    </script>
+    @Html.Partial("_ProductListTemplate")
+}

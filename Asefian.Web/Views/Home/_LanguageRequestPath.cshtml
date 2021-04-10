@@ -1,0 +1,21 @@
+﻿@if (BaseController.GetLanguage() == Asefian.Model.Context.Language.Persian)
+{
+    <a href="@BaseController.GetEnglishUrl(Request.Url.LocalPath + Request.Url.Query)" style="text-decoration:none;">
+        <div class="lang">
+            <label class="nav-overlay  uk-navbar-toggle" id="English" href="">
+                English
+            </label>
+        </div>
+    </a>
+}
+else if (BaseController.GetLanguage() == Asefian.Model.Context.Language.English)
+{
+    <a href="@BaseController.GetPersianUrl(Request.Url.LocalPath + Request.Url.Query)" style="text-decoration:none;">
+        <div class="lang">
+            <label class="nav-overlay uk-navbar-toggle" id="Persian" href="">
+                فارسی
+            </label>
+        </div>
+    </a>
+}
+

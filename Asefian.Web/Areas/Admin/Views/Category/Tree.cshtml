@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "لیست دسته بندی ها";
+}
+
+<link href="/scripts/jstree-3.3.8/dist/themes/default/style.min.css" rel="stylesheet" />
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/category/tree">لیست دسته بندی</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-margin">
+            <input id="hiddenId" type="hidden" />
+            <a href="/admin/category/add" class="uk-button uk-button-primary"><i class="far fa-plus v-middle"></i>&nbsp; گروه محصول جدید</a>
+            <div class="txt-al-l inline-block flol">
+                @*<button id="btnFeature" class="uk-button uk-button-primary uk-hidden"><i class="far fa-filter v-middle"></i>&nbsp; ویژگی ها</button>*@
+                <button id="btnAdd" class="uk-button uk-button-primary uk-hidden"><i class="far fa-edit v-middle"></i>&nbsp; <span id="lblTitle">دسته بندی</span> جدید</button>
+                <button id="btnEdit" class="uk-button uk-button-secondary uk-hidden"><i class="far fa-edit v-middle"></i>&nbsp; ویرایش</button>
+                <button id="btnDelete" class="uk-button uk-button-danger uk-hidden"><i class="far fa-close v-middle"></i>&nbsp; حذف</button>
+            </div>
+        </div>
+        <div id="list" class="m-top-20"></div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="/scripts/jstree-3.3.8/dist/jstree.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getList();
+
+            $("#btnAdd").on("click", function (event) {
+                event.preventDefault();
+                document.location.href = "/admin/category/add/" + $("#hiddenId").val();
+            });
+
+            $("#btnEdit").on("click", function (event) {
+                event.preventDefault();
+                document.location.href = "/admin/category/edit/" + $("#hiddenId").val();
+            });
+
+            $("#btnFeature").on("click", function (event) {
+                event.preventDefault();
+                document.location.href = "/admin/category/feature/" + $("#hiddenId").val();
+            });
+
+            $("#btnDelete").on("click", function (event) {
+                event.preventDefault();
+                confirmMessage("آیا از حذف اطلاعات اطمینان دارید؟", function () {
+                    boxLoader("#list", true);
+                    backgroundPost("/admin/category/delete/" + $("#hiddenId").val(), null, function (response) {
+                        if (response.status == 200) {
+                            document.location.reload();
+                        }
+                        else {
+                            boxLoader("#list", false);
+                            alert(response.message);
+                        }
+                    });
+                });
+            });
+        });
+
+        function getList() {
+            $("#list")
+                .on('changed.jstree', function (e, data) {
+                    var i, j, selected = [];
+                    for (i = 0, j = data.selected.length; i < j; i++) {
+                        selected.push(data.instance.get_node(data.selected[i]));
+                    }
+                    checkNodeItem(selected[0].data);
+                })
+                .jstree({
+                    'core': {
+                        multiple: false,
+                        data: function (node, callback) {
+                            $.ajax({
+                                url: '/admin/category/loadChild',
+                                data: { id: node.id }
+                            }).done(function (response) {
+                                var data = [];
+                                for (var i = 0; i < response.data.length; i++) {
+                                    data.push({
+                                        id: response.data[i].id,
+                                        parent: node.id,
+                                        text: response.data[i].title,
+                                        icon: getLevelIcon(response.data[i].level),
+                                        children: response.data[i].children > 0,
+                                        data: response.data[i]
+                                    })
+                                }
+                                callback(data);
+                            });
+                        }
+                    }
+                });
+        }
+
+        function getLevelIcon(level) {
+            switch (parseInt(level)) {
+                case 0:
+                    return 'fal fa-layer-group';
+                case 1:
+                    return 'fal fa-tags';
+                case 2:
+                    return 'fal fa-tag';
+                default:
+                    return null;
+            }
+        }
+
+        function checkNodeItem(item) {
+            if (item != null) {
+                $("#btnFeature").addClass("uk-hidden");
+                $("#btnAdd, #btnEdit, #btnDelete").removeClass("uk-hidden");
+                $("#hiddenId").val(item.id);
+                //if (item.level == 0) {
+                //    $("#lblTitle").html("دسته بندی");
+                //}
+                if (item.level == 1) {
+                    //$("#lblTitle").html("سری");
+                    $("#btnAdd").addClass("uk-hidden");
+                }
+                if (item.level == 2) {
+                    $("#btnAdd").addClass("uk-hidden"); // یعنی برای سری بود، چون سری آخرین سطح دسته بندی است
+                }
+            }
+            else {
+                $("#hiddenId").val('');
+                $("#btnAdd, #btnEdit, #btnDelete, #btnFeature").removeClass("uk-hidden");
+            }
+        }
+
+    </script>
+}

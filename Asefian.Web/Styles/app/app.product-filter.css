@@ -1,0 +1,24 @@
+﻿.uk-card-body {
+    border: solid 1px silver;
+    padding: 10px !important;
+    position: relative;
+}
+
+.value-item .icon {
+    position: absolute;
+    left: 6px;
+    top: 13px;
+    cursor: pointer;
+}
+
+.item-color {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+
+input[type=color] {
+    width: 40px;
+    padding: 0;
+}

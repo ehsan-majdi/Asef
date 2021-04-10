@@ -1,0 +1,156 @@
+﻿
+.alternative-title {
+    margin-top: 8px;
+    display: inline-block;
+    font-size: 12px;
+    color: #888;
+}
+
+div.add-address {
+    padding: 17px;
+    border: dashed 2px silver;
+    cursor: pointer;
+}
+
+#list .table {
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+}
+
+#list .table-cell {
+    border: solid 1px silver;
+}
+
+    #list .table-cell:first-child {
+        border-left: none;
+    }
+
+#list .active-address .table-cell {
+    background-color: #e8f5e9;
+}
+
+#list .active-address .table-cell {
+    border: solid 1px #4db6ac;
+    border-left: none;
+}
+
+#list .receiver {
+    display: block;
+    margin-left: 30px;
+}
+
+#list .edit-address, #list .delete {
+    width: 35px;
+    text-align: center;
+}
+
+#list .delete {
+    background-color: #ffcdd2;
+}
+
+#list .edit-address {
+    background-color: #c8e6c9;
+}
+
+#list .address-operation {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.4s;
+    -webkit-transition: opacity 0.4s;
+    border-right: solid 1px silver;
+    bottom: 0;
+}
+
+#list .table-row:hover .address-operation {
+    opacity: 0.9;
+}
+
+#list .address-operation-button {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+    #list .address-operation-button > i {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+#deliveryTypeTitle, #abstractTitle {
+    margin: 0 10px 10px 0;
+}
+
+#date table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#date td {
+    border: solid 1px silver;
+    padding: 8px;
+}
+
+.box-price {
+    padding: 25px;
+    background: #dcf3f6;
+    border-radius: 5px;
+    max-width: 380px;
+    width: 380px;
+    direction: rtl;
+}
+
+    .box-price .discount {
+        background-color: #FFCDD2;
+        padding: 10px 7px;
+        border-radius: 3px;
+        margin-bottom: 17px;
+        color: #333;
+        display: none;
+    }
+
+        .box-price .discount .remove-coupon {
+            cursor: pointer;
+            color: red;
+            padding: 3px;
+        }
+
+.abstractOrder {
+    display: flex;
+}
+
+#listCart {
+    flex: 1;
+}
+
+@media screen and (max-width: 1200px) {
+    .box-price {
+        max-width: 275px;
+        width: 275px;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .abstractOrder {
+        flex-direction: column;
+    }
+
+    .box-price {
+        max-width: auto;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #listCart .w70 {
+        display: none;
+    }
+
+    #listCart h5 {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,122 @@
+﻿<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/branch/list">لیست شعب</a></li>
+            @if (ViewBag.Id != null)
+            {
+                <li><a href="/admin/branch/edit/@ViewBag.Id">ویرایش شعب</a></li>
+            }
+            else
+            {
+                <li><a href="/admin/branch/add">شعب جدید</a></li>
+            }
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l uk-flex-center" uk-grid>
+            <form id="frmBranch" class="form" action="/admin/branch/save" data-load="/admin/branch/load" method="post" data-success="saveComplete" loader="1">
+
+                <input type="hidden" name="id" value="@ViewBag.Id" lock />
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtTitle">عنوان شعبه</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-font"></i></span>
+                            <input id="txtTitle" class="uk-input" type="text" name="title" data-validate="required, Persian" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtOrder">ترتیب</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-sort"></i></span>
+                            <input id="txtOrder" class="uk-input" type="tel" name="order" data-validate="required, number" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtTel">تلفن</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-phone"></i></span>
+                            <input id="txtTel" class="uk-input" type="tel" name="tel" data-validate="required" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtFax">فکس</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-fax"></i></span>
+                            <input id="txtFax" class="uk-input" type="tel" name="fax" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtEmail">ایمیل</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-envelope"></i></span>
+                            <input id="txtEmail" class="uk-input" type="email" name="email" data-validate="email" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtLatitude">عرض جغرافیایی</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-location"></i></span>
+                            <input id="txtLatitude" class="uk-input" type="text" name="latitude" data-validate="float" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtLongitude">طول جغرافیایی</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-location"></i></span>
+                            <input id="txtLongitude" class="uk-input" type="text" name="longitude" data-validate="float" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtAddress">آدرس</label>
+                    <div class="uk-form-controls">
+                        <textarea id="txtAddress" class="uk-textarea" name="address" data-validate="required"></textarea>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="cmbStatus">وضعیت</label>
+                    <div class="uk-form-controls">
+                        <select id="cmbStatus" class="uk-select" name="statusId" data-validate="required">
+                            <option value="">...</option>
+                            <option value="1">فعال</option>
+                            <option value="2">در حال تعمیر</option>
+                            <option value="3">غیرفعال</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <button id="btnSubmit" type="submit" class="uk-button uk-button-primary uk-width-1-1">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="/scripts/app/branch/app.save.js"></script>
+}

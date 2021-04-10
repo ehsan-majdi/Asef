@@ -1,0 +1,69 @@
+﻿@model Asefian.Model.Context.Data.Product
+@{
+    ViewBag.Title = "گالری تصاویر محصول";
+}
+
+@Styles.Render("~/styles/fancy")
+<link href="/styles/app/app.product.css" rel="stylesheet" />
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/product/list">محصولات</a></li>
+            <li><a href="/admin/product/edit/@Model.Id">@Model.Sku</a></li>
+            <li><a href="/admin/product/gallery/@Model.Id">گالری</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div>
+            <div class="uk-width-1-1@s uk-width-1-1@m uk-width-1-1@l">
+                <h5>گالری تصاویر: @Model.Code</h5>
+                <hr class="uk-divider-icon">
+            </div>
+        </div>
+        <div id="list" class="m-top-20 list" data-url="/admin/product/productImageList/@ViewBag.Id">
+        </div>
+    </div>
+
+    <div class="hide">
+        <form id="form" action="/admin/product/addImage">
+            <input type="hidden" id="hiddenId" name="id" value="@ViewBag.Id" lock />
+            <input type="hidden" id="hiddenFileId" name="fileId" />
+            <input type="hidden" id="hiddenFileName" name="fileName" />
+            <input type="file" id="file" />
+        </form>
+    </div>
+</div>
+
+@section scripts{
+
+    @Scripts.Render("~/scripts/fancy")
+    @Scripts.Render("~/scripts/upload")
+
+    <script src="/scripts/app/product/app.gallery.js"></script>
+
+    <script id="template" type="text/x-jsrender">
+        <ul class="uk-thumbnav" uk-margin>
+            {{for list}}
+            <li class="relative">
+                <a href="{{:link}}" class="gallery-file uk-background-cover uk-inline" title="{{:fileName}}" style="background-image: url('{{:link}}');">
+                    <div class="uk-position-cover"></div>
+                </a>
+                <a href="#" class="gallery-del-icon delete" data-id="{{:id}}"><i class="far fa-trash-alt m-top-7"></i></a>
+            </li>
+            {{/for}}
+            <li>
+                <a href="#" class="add add-file">
+                    <div class="uk-inline uk-dark">
+                        <div class="gallery-add-file"></div>
+                        <div class="uk-overlay-default uk-position-cover">
+                            <div class="uk-position-center"><i class="fas fa-plus fa-3x white"></i></div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </script>
+}

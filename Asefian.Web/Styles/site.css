@@ -1,0 +1,41 @@
+﻿.uk-modal-title {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.uk-modal-body {
+    padding: 20px 30px 0 20px;
+}
+
+.uk-modal-footer {
+    padding: 10px 30px;
+}
+
+.form {
+    position: relative;
+    min-height: 70px;
+    border-radius: 5px;
+}
+
+.box-loader {
+    border-radius: 5px;
+}
+
+.dialog-loader-content {
+    background-color: rgba(0,0,0,0.2);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+    .dialog-loader-content .uk-spinner.uk-icon {
+        position: absolute;
+        top: calc(50% - 15px);
+        left: calc(50% - 15px);
+    }
+
+.element-error {
+    border: solid 1px #e53935;
+}

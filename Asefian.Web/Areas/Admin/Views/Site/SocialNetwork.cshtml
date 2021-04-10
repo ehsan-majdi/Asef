@@ -1,0 +1,64 @@
+﻿@model List<Asefian.Model.Context.Core.BaseInformation>
+@{
+    ViewBag.Title = "شبکه اجتماعی";
+}
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/site/settings">تنظیمات</a></li>
+            <li>اطلاعات شبکه اجتماعی</li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-1@m uk-child-width-1-1@l uk-flex-center" uk-grid>
+            <form id="frmSettings" class="form" action="/admin/site/saveSocialNetwork" method="post" data-success="saveComplete" loader="1">
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtInstagram">آدرس اینستاگرام</label>
+                    <div class="uk-form-controls">
+                        <input type="text" id="txtInstagram" class="uk-input txt-al-l ltr" name="instagram" value="@(Model.SingleOrDefault(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteInstagram)?.Value)" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtTelegram">آدرس تلگرام</label>
+                    <div class="uk-form-controls">
+                        <input type="text" id="txtTelegram" class="uk-input txt-al-l ltr" name="telegram" value="@(Model.SingleOrDefault(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteTelegram)?.Value)" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtFacebook">آدرس فیس بوک</label>
+                    <div class="uk-form-controls">
+                        <input type="text" id="txtFacebook" class="uk-input txt-al-l ltr" name="facebook" value="@(Model.SingleOrDefault(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteFacebook)?.Value)" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtYoutube">آدرس یوتیوب</label>
+                    <div class="uk-form-controls">
+                        <input type="text" id="txtYoutube" class="uk-input txt-al-l ltr" name="youtube" value="@(Model.SingleOrDefault(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteYoutube)?.Value)" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtTwitter">آدرس توئیتر</label>
+                    <div class="uk-form-controls">
+                        <input type="text" id="txtTwitter" class="uk-input txt-al-l ltr" name="twitter" value="@(Model.SingleOrDefault(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteTwitter)?.Value)" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <button id="btnSubmit" type="submit" class="uk-button uk-button-primary">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="/scripts/app/site/app.social-network.js"></script>
+}

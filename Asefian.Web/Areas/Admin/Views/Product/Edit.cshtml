@@ -1,0 +1,177 @@
+﻿@Styles.Render("~/styles/editor")
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/product/list">لیست محصولات</a></li>
+            @if (ViewBag.Id != null)
+            {
+                <li><a href="/admin/product/edit/@ViewBag.Id">ویرایش محصول</a></li>
+            }
+            else
+            {
+                <li><a href="/admin/product/add">محصول جدید</a></li>
+            }
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l uk-flex-center" uk-grid>
+            <form id="frmProduct" class="form" action="/admin/product/save" data-load="/admin/product/load" method="post" data-success="saveComplete" loader="1" data-load-success="loadComplete">
+
+                <input type="hidden" name="id" value="@ViewBag.Id" lock />
+
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="cmbCategory">دسته بندی</label>
+                    <div class="uk-form-controls">
+                        <select id="cmbCategory" class="uk-select" name="categoryId" data-url="/admin/category/selectchild" data-validate="required"></select>
+                    </div>
+                </div>
+
+                <div class="uk-margin uk-hidden">
+                    <label class="uk-form-label" for="cmbCategoryFeature">دسته بندی ویژگی</label>
+                    <div class="uk-form-controls">
+                        <select id="cmbCategoryFeature" class="uk-select" name="categoryFeatureId" data-url="/admin/category/featureSelect"></select>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="cmbBrand">برند</label>
+                    <div class="uk-form-controls">
+                        <select id="cmbBrand" class="uk-select" name="brandId" data-url="/admin/brand/select" data-validate="required"></select>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtCode">کد محصول</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-copyright"></i></span>
+                            <input id="txtCode" class="uk-input" type="text" name="code" maxlength="30" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtPrice">قیمت</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-money-bill"></i></span>
+                            <input id="txtPrice" class="uk-input money-separator" type="tel" name="price" data-validate="required, number" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtDiscount">تخفیف</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-comment-dollar"></i></span>
+                            <input id="txtDiscount" class="uk-input money-separator" type="tel" name="discount" data-validate="required, number" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtFileName">تصویر</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-image"></i></span>
+                            <input id="hiddenFileId" type="hidden" name="fileId" />
+                            <input id="txtFileName" class="uk-input input-ltr-left-icon" type="text" name="fileName" readonly />
+                            <input id="file" type="file" class="hide" />
+                            <span id="upload" class="form-icon"><i class="fal fa-upload"></i></span>
+                            <span id="clearFile" class="form-icon hide"><i class="fal fa-times"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="cmbStatus">وضعیت</label>
+                    <div class="uk-form-controls">
+                        <select id="cmbStatus" class="uk-select" name="statusId" data-validate="required">
+                            <option value="">...</option>
+                            <option value="1">موجود</option>
+                            <option value="2">ناموجود</option>
+                            <option value="3">غیر فعال</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="cmbWidth">عرض</label>
+                    <div class="uk-form-controls">
+                        <select id="cmbWidth" class="uk-select" name="width" data-validate="required">
+                            <option value="">...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                </div>   <div class="uk-margin">
+                    <label class="uk-form-label" for="cmbHeight">ارتفاع</label>
+                    <div class="uk-form-controls">
+                        <select id="cmbHeight" class="uk-select" name="height" data-validate="required">
+                            <option value="">...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="uk-width-1-1@m uk-margin-medium-top">
+                    <ul uk-tab="connect: #translationList">
+                        @foreach (var item in Asefian.Model.Context.Language.GetList())
+                        {
+                            <li><a href="#">@item.PersianTitle</a></li>
+                        }
+                    </ul>
+
+                    <ul id="translationList" class="uk-switcher uk-margin" data-list="translations">
+                        @foreach (var item in Asefian.Model.Context.Language.GetList())
+                        {
+                            <li data-list-form>
+                                <input name="languageId" type="hidden" value="@item.Id" key lock />
+                                <label>عنوان</label>
+                                <div class="uk-inline uk-width-1-1">
+                                    <span class="uk-form-icon"><i class="fal fa-heading"></i></span>
+                                    <input class="uk-input" type="text" name="title" data-validate="required" />
+                                </div>
+                                <div class="uk-margin">
+                                    <label>توضیحات</label>
+                                    <div class="uk-inline uk-width-1-1 ">
+                                        <span class="uk-form-icon"><i class="fal fa-heading"></i></span>
+                                        <textarea class="uk-input txtDescription" type="text" name="description" data-validate="required" ></textarea>
+                                    </div>
+                                </div>
+                                @*<div class="uk-margin">
+                                    <label>نقدوبررسی</label>
+                                    <div class="uk-inline uk-width-1-1 ">
+                                        <span class="uk-form-icon"><i class="fal fa-heading"></i></span>
+                                        <input class="uk-input" type="text" name="review" data-validate="required" />
+                                    </div>
+                                </div>*@
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+                <div class="uk-margin">
+                    <button id="btnSubmit" type="submit" class="uk-button uk-button-primary uk-width-1-1">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/upload")
+    @Scripts.Render("~/scripts/editor")
+    <script type="text/javascript" src="/scripts/app/product/app.save.js"></script>
+}

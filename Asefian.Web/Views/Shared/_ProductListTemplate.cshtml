@@ -1,0 +1,92 @@
+﻿
+<style>
+    
+    .grid-item.w1, .grid-item {
+        width: 16.66666666%;
+        height: 16.66666666vw;
+        background-position: center;
+        background-size: cover;
+        padding: 0;
+        overflow: hidden;
+    }
+
+        .grid-item.w2 {
+            width: 33.33333333%;
+            /*width:43em*/
+        }
+
+        .grid-item.w3 {
+            width: 50%;
+        }
+
+        .grid-item.w4 {
+            width: 100%;
+        }
+
+        /*.grid-item.w5 {
+            width: 83.33333333%;
+        }
+
+        .grid-item.w6 {
+            width: 100%;
+        }*/
+
+        .grid-item.h2 {
+            height: 33.33333333vw;
+            /*height:33em*/
+        }
+
+        .grid-item.h3 {
+            height: 50vw;
+        }
+
+        .grid-item.h4 {
+            height: 100vw;
+        }
+
+    /*.grid-item.h5 {
+            height: 83.33333333vw;
+        }
+
+        .grid-item.h6 {
+            height: 100vw;
+        }*/
+
+    .item-image-holder {
+        /*margin: 8px 8px 0 0;*/
+        margin: 0 29px 0 0;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .uk-position-small {
+        margin: 15px 19px 10px 10px;
+    }
+</style>
+<script src="~/Scripts/packery.pkgd.min.js"></script>
+<script id="template" type="text/x-jsrender">
+    {{if list.length > 0}}
+    <div>
+        <div id="productList" class="columns">
+            <div class="grid">
+                {{for list}}
+                <a href="/product/{{:id}}/{{:sku}}">
+                    <div class="grid-item w{{:width}} h{{:height}} uk-inline-clip uk-transition-toggle">
+                        <div class="item-image-holder" style="background-image:url('/upload/image/resize/700x700/{{:fileId}}/{{:fileName}}');">
+                            <div class="item-detail uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle">
+                                <h4 class="uk-margin-remove">{{:code}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {{/for}}
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_Pagination")
+    {{else}}
+    <h5 class="txt-al-c">محصولی یافت نشد.</h5>
+    {{/if}}
+</script>
+

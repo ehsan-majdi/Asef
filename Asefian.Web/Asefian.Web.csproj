@@ -1,0 +1,981 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E47E8404-56E4-448B-83BD-9C082132526C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Asefian.Web</RootNamespace>
+    <AssemblyName>Asefian.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44387</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageProcessor, Version=2.7.0.100, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageProcessor.2.7.0.100\lib\net452\ImageProcessor.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageProcessor.Plugins.Cair, Version=1.2.0.100, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageProcessor.Plugins.Cair.1.2.0.100\lib\net452\ImageProcessor.Plugins.Cair.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageProcessor.Plugins.WebP, Version=1.2.0.100, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageProcessor.Plugins.WebP.1.2.0.100\lib\net452\ImageProcessor.Plugins.WebP.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Site.css" />
+    <Content Include="Fonts\fontawsome\all.css" />
+    <Content Include="Fonts\fontawsome\brands.css" />
+    <Content Include="Fonts\fontawsome\brands.min.css" />
+    <Content Include="Fonts\fontawsome\fontawesome.css" />
+    <Content Include="Fonts\fontawsome\fontawesome.min.css" />
+    <Content Include="Fonts\fontawsome\light.css" />
+    <Content Include="Fonts\fontawsome\light.min.css" />
+    <Content Include="Fonts\fontawsome\regular.css" />
+    <Content Include="Fonts\fontawsome\regular.min.css" />
+    <Content Include="Fonts\fontawsome\solid.css" />
+    <Content Include="Fonts\fontawsome\solid.min.css" />
+    <Content Include="Fonts\fontawsome\svg-with-js.css" />
+    <Content Include="Fonts\fontawsome\svg-with-js.min.css" />
+    <Content Include="Fonts\fontawsome\v4-shims.css" />
+    <Content Include="Fonts\fontawsome\v4-shims.min.css" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-brands-400.svg" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-light-300.svg" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-regular-400.svg" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-solid-900.svg" />
+    <Content Include="Fonts\sans\fontiran.css" />
+    <Content Include="Fonts\yekan\fontiran.css" />
+    <Content Include="Fonts\yekan\svg\iranyekanwebblack.svg" />
+    <Content Include="Fonts\yekan\svg\iranyekanwebbold.svg" />
+    <Content Include="Fonts\yekan\svg\iranyekanwebextrablack.svg" />
+    <Content Include="Fonts\yekan\svg\iranyekanwebextrabold.svg" />
+    <Content Include="Fonts\yekan\svg\iranyekanweblight.svg" />
+    <Content Include="Fonts\yekan\svg\iranyekanwebmedium.svg" />
+    <Content Include="Fonts\yekan\svg\iranyekanwebregular.svg" />
+    <Content Include="Fonts\yekan\svg\iranyekanwebthin.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\aparat.png" />
+    <Content Include="Images\asefianLogo.png" />
+    <Content Include="Images\LogoEN.png" />
+    <Content Include="Images\LogoFA.jpg" />
+    <Content Include="Images\map.jpg" />
+    <Content Include="Images\no-image.png" />
+    <Content Include="Images\q23.png" />
+    <Content Include="Images\Tarh.jpg" />
+    <Content Include="Scripts\app\branch\app.list.js" />
+    <Content Include="Scripts\app\branch\app.save.js" />
+    <Content Include="Scripts\app\brand\app.list.js" />
+    <Content Include="Scripts\app\brand\app.save.js" />
+    <Content Include="Scripts\app\category\app.feature.list.js" />
+    <Content Include="Scripts\app\category\app.feature.save.js" />
+    <Content Include="Scripts\app\category\app.feature.value.js" />
+    <Content Include="Scripts\app\category\app.list.js" />
+    <Content Include="Scripts\app\category\app.save.js" />
+    <Content Include="Scripts\app\faqcategory\app.list.js" />
+    <Content Include="Scripts\app\faqcategory\app.save.js" />
+    <Content Include="Scripts\app\faq\app.list.js" />
+    <Content Include="Scripts\app\faq\app.save.js" />
+    <Content Include="Scripts\app\invoice\app.list.js" />
+    <Content Include="Scripts\app\jquery.form.js" />
+    <Content Include="Scripts\app\jquery.list.js" />
+    <Content Include="Scripts\app\jquery.select.js" />
+    <Content Include="Scripts\app\jquery.validate.js" />
+    <Content Include="Scripts\app\messagebox\app.list.js" />
+    <Content Include="Scripts\app\news\app.list.js" />
+    <Content Include="Scripts\app\news\app.save.js" />
+    <Content Include="Scripts\app\product-filter\app.filter.js" />
+    <Content Include="Scripts\app\product-filter\app.list.js" />
+    <Content Include="Scripts\app\product-filter\app.save.js" />
+    <Content Include="Scripts\app\product-filter\app.value.js" />
+    <Content Include="Scripts\app\product\app.filters.js" />
+    <Content Include="Scripts\app\product\app.gallery.js" />
+    <Content Include="Scripts\app\product\app.list.js" />
+    <Content Include="Scripts\app\product\app.review.js" />
+    <Content Include="Scripts\app\product\app.save.js" />
+    <Content Include="Scripts\app\service\app.list.js" />
+    <Content Include="Scripts\app\service\app.save.js" />
+    <Content Include="Scripts\app\site\app.contact.js" />
+    <Content Include="Scripts\app\site\app.delivery.js" />
+    <Content Include="Scripts\app\site\app.page.js" />
+    <Content Include="Scripts\app\site\app.social-network.js" />
+    <Content Include="Scripts\app\site\app.tariff.js" />
+    <Content Include="Scripts\app\slider\app.list.js" />
+    <Content Include="Scripts\app\slider\app.save.js" />
+    <Content Include="Scripts\app\specialProject\app.gallery.js" />
+    <Content Include="Scripts\app\specialProject\app.list.js" />
+    <Content Include="Scripts\app\specialProject\app.save.js" />
+    <Content Include="Scripts\app\usergroup\app.access.js" />
+    <Content Include="Scripts\app\usergroup\app.edit.js" />
+    <Content Include="Scripts\app\usergroup\app.list.js" />
+    <Content Include="Scripts\app\usergroup\app.save.js" />
+    <Content Include="Scripts\app\user\app.change-passowrd.js" />
+    <Content Include="Scripts\app\user\app.list.js" />
+    <Content Include="Scripts\app\user\app.outsiderlist.js" />
+    <Content Include="Scripts\app\user\app.save.js" />
+    <Content Include="Scripts\app\user\app.settings.js" />
+    <Content Include="Scripts\fancybox.3.5.7\dist\jquery.fancybox.css" />
+    <Content Include="Scripts\fancybox.3.5.7\dist\jquery.fancybox.js" />
+    <Content Include="Scripts\fancybox.3.5.7\dist\jquery.fancybox.min.css" />
+    <Content Include="Scripts\fancybox.3.5.7\dist\jquery.fancybox.min.js" />
+    <Content Include="Scripts\fancybox.3.5.7\docs\index.html" />
+    <Content Include="Scripts\fancybox.3.5.7\gulpfile.js" />
+    <Content Include="Scripts\fancybox.3.5.7\src\css\core.css" />
+    <Content Include="Scripts\fancybox.3.5.7\src\css\fullscreen.css" />
+    <Content Include="Scripts\fancybox.3.5.7\src\css\share.css" />
+    <Content Include="Scripts\fancybox.3.5.7\src\css\slideshow.css" />
+    <Content Include="Scripts\fancybox.3.5.7\src\css\thumbs.css" />
+    <Content Include="Scripts\fancybox.3.5.7\src\js\core.js" />
+    <Content Include="Scripts\fancybox.3.5.7\src\js\fullscreen.js" />
+    <Content Include="Scripts\fancybox.3.5.7\src\js\guestures.js" />
+    <Content Include="Scripts\fancybox.3.5.7\src\js\hash.js" />
+    <Content Include="Scripts\fancybox.3.5.7\src\js\media.js" />
+    <Content Include="Scripts\fancybox.3.5.7\src\js\share.js" />
+    <Content Include="Scripts\fancybox.3.5.7\src\js\slideshow.js" />
+    <Content Include="Scripts\fancybox.3.5.7\src\js\thumbs.js" />
+    <Content Include="Scripts\fancybox.3.5.7\src\js\wheel.js" />
+    <Content Include="Scripts\file.upload.9.21.0\angularjs.html" />
+    <Content Include="Scripts\file.upload.9.21.0\basic-plus.html" />
+    <Content Include="Scripts\file.upload.9.21.0\basic.html" />
+    <Content Include="Scripts\file.upload.9.21.0\bower-version-update.js" />
+    <Content Include="Scripts\file.upload.9.21.0\cors\postmessage.html" />
+    <Content Include="Scripts\file.upload.9.21.0\cors\result.html" />
+    <Content Include="Scripts\file.upload.9.21.0\css\jquery-ui-demo-ie8.css" />
+    <Content Include="Scripts\file.upload.9.21.0\css\jquery-ui-demo.css" />
+    <Content Include="Scripts\file.upload.9.21.0\css\jquery.fileupload-noscript.css" />
+    <Content Include="Scripts\file.upload.9.21.0\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="Scripts\file.upload.9.21.0\css\jquery.fileupload-ui.css" />
+    <Content Include="Scripts\file.upload.9.21.0\css\jquery.fileupload.css" />
+    <Content Include="Scripts\file.upload.9.21.0\css\style.css" />
+    <Content Include="Scripts\file.upload.9.21.0\img\loading.gif" />
+    <Content Include="Scripts\file.upload.9.21.0\img\progressbar.gif" />
+    <Content Include="Scripts\file.upload.9.21.0\index.html" />
+    <Content Include="Scripts\file.upload.9.21.0\jquery-ui.html" />
+    <Content Include="Scripts\file.upload.9.21.0\js\app.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\cors\jquery.postmessage-transport.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\cors\jquery.xdr-transport.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\jquery.fileupload-angular.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\jquery.fileupload-audio.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\jquery.fileupload-image.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\jquery.fileupload-jquery-ui.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\jquery.fileupload-process.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\jquery.fileupload-ui.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\jquery.fileupload-validate.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\jquery.fileupload-video.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\jquery.fileupload.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\jquery.iframe-transport.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\main.js" />
+    <Content Include="Scripts\file.upload.9.21.0\js\vendor\jquery.ui.widget.js" />
+    <Content Include="Scripts\file.upload.9.21.0\LICENSE.txt" />
+    <Content Include="Scripts\file.upload.9.21.0\server\gae-go\static\favicon.ico" />
+    <Content Include="Scripts\file.upload.9.21.0\server\gae-go\static\robots.txt" />
+    <Content Include="Scripts\file.upload.9.21.0\server\gae-python\static\favicon.ico" />
+    <Content Include="Scripts\file.upload.9.21.0\server\gae-python\static\robots.txt" />
+    <Content Include="Scripts\file.upload.9.21.0\server\php\index.php" />
+    <Content Include="Scripts\file.upload.9.21.0\server\php\UploadHandler.php" />
+    <Content Include="Scripts\file.upload.9.21.0\test\index.html" />
+    <Content Include="Scripts\file.upload.9.21.0\test\test.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\froala_editor.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\froala_editor.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\froala_editor.pkgd.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\froala_editor.pkgd.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\froala_style.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\froala_style.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\char_counter.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\char_counter.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\code_view.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\code_view.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\colors.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\colors.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\draggable.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\draggable.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\emoticons.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\emoticons.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\file.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\file.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\fullscreen.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\fullscreen.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\help.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\help.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\image.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\image.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\image_manager.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\image_manager.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\line_breaker.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\line_breaker.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\quick_insert.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\quick_insert.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\special_characters.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\special_characters.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\table.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\table.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\video.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\plugins\video.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\themes\dark.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\themes\dark.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\themes\gray.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\themes\gray.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\themes\red.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\themes\red.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\themes\royal.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\themes\royal.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\third_party\embedly.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\third_party\embedly.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\third_party\spell_checker.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\css\third_party\spell_checker.min.css" />
+    <Content Include="Scripts\froala.editor.2.8.4\editor.jpg" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\at.js.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\aviary\index.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\bootstrap\grid.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\bootstrap\lists.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\bootstrap\modal.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\code-mirror.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\font-awesome-5-css.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\font-awesome-5-js.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\jquery\mobile.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\jquery\ui_modal.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\require_js\index.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\require_js\js\app.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\require_js\js\lib\require.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\3rd-party\spell-checker\spell-checker.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\api\get_html.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\api\init_destroy.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\api\insert_html.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\api\live_code_preview.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\api\live_content_preview.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\api\selection.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\buttons\custom_buttons.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\buttons\custom_dropdown.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\buttons\external_button.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\buttons\subscript_superscript.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\events\blur_focus.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\events\content_changed.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\events\drop.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\events\image_removed.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\events\initialized_destroy.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\file_s3_upload.php" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\image\custom_button.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\image\default_width.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\image\image_styles.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\image\insert_base64.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\image_s3_upload.php" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\initialization\edit_in_popup.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\initialization\initialized_event.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\initialization\init_on_button.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\initialization\init_on_click.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\initialization\init_on_h1.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\initialization\init_on_image.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\initialization\init_on_link.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\init_inside_iframe\basic.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\init_inside_iframe\content.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\init_inside_iframe\inline.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\init_on_click\basic.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\init_on_click\inline.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\init_on_click\two_editors.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\international\direction_rtl.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\international\language.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\international\rtl_ltr_buttons.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\link\custom_validation.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\link\link_styles.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\link\predefined_links.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\misc\scrollable_container.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\misc\scrollable_container_inline.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\paragraph_modes\enter_br.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\paragraph_modes\enter_div.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\paragraph_modes\enter_p.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\paste\attrs.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\paste\plain.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\paste\tags.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\plugins\char_counter.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\plugins\full_screen.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\plugins\line_breaker.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\plugins\quick_insert.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popular\disable_edit.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popular\disable_paragraphs.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popular\full.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popular\full_page.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popular\iframe.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popular\init_on_click.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popular\textarea.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popular\toolbar_buttons.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popular\toolbar_inline.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popular\two_instances.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popular\z_index.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popups\colors.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popups\custom.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\popups\emoticons.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\styling\adjustable_height.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\styling\font_family.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\styling\height.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\styling\inline.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\styling\paragraph.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\styling\placeholder.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\styling\width.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\table\cell_style.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\table\insert_helper.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\table\nested.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\table\resize.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\table\style.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\tests\bottom_offset_scrollable_container.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\tests\bottom_scrollable_container.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\tests\core.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\tests\full_br.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\tests\full_page_bottom.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\tests\image_manager.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\tests\init_on_click\full_page.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\tests\max_height.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\tests\toolbar_inline_two.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\tests\top_offset_scrollable_container.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\tests\top_scrollable_container.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\themes\dark.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\themes\gray.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\themes\red.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\themes\royal.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\toolbar\bottom.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\toolbar\bottom_offset.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\toolbar\buttons.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\toolbar\external.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\toolbar\external_inline.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\toolbar\inline.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\toolbar\inline_selection.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\toolbar\offset.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\toolbar\show_selection.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\toolbar\sticky.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\typing\keep_format.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\typing\shortcuts.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\html\typing\tab.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\img\photo1.jpg" />
+    <Content Include="Scripts\froala.editor.2.8.4\index.html" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\froala_editor.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\froala_editor.pkgd.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\ar.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\bs.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\cs.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\da.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\de.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\el.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\en_ca.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\en_gb.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\es.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\et.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\fa.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\fi.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\fr.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\he.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\hr.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\hu.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\id.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\it.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\ja.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\ko.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\ku.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\me.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\nb.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\nl.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\pl.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\pt_br.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\pt_pt.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\ro.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\ru.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\sk.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\sr.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\sv.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\th.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\tr.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\uk.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\vi.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\zh_cn.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\languages\zh_tw.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\align.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\char_counter.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\code_beautifier.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\code_view.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\colors.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\draggable.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\emoticons.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\entities.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\file.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\font_family.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\font_size.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\forms.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\fullscreen.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\help.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\image.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\image_manager.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\inline_style.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\line_breaker.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\link.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\lists.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\paragraph_format.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\paragraph_style.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\print.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\quick_insert.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\quote.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\save.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\special_characters.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\table.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\url.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\video.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\plugins\word_paste.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\third_party\embedly.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\third_party\image_aviary.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\js\third_party\spell_checker.min.js" />
+    <Content Include="Scripts\froala.editor.2.8.4\License.txt" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-brands-400.eot" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-brands-400.ttf" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-brands-400.woff" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-brands-400.woff2" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-light-300.eot" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-light-300.ttf" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-light-300.woff" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-light-300.woff2" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-regular-400.eot" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-regular-400.ttf" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-regular-400.woff" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-regular-400.woff2" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-solid-900.eot" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-solid-900.ttf" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-solid-900.woff" />
+    <Content Include="Fonts\fontawsome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Fonts\sans\eot\IRANSansWeb.eot" />
+    <Content Include="Fonts\sans\eot\IRANSansWeb_Bold.eot" />
+    <Content Include="Fonts\sans\eot\IRANSansWeb_Light.eot" />
+    <Content Include="Fonts\sans\eot\IRANSansWeb_Medium.eot" />
+    <Content Include="Fonts\sans\eot\IRANSansWeb_UltraLight.eot" />
+    <Content Include="Fonts\sans\ttf\IRANSansWeb.ttf" />
+    <Content Include="Fonts\sans\ttf\IRANSansWeb_Bold.ttf" />
+    <Content Include="Fonts\sans\ttf\IRANSansWeb_Light.ttf" />
+    <Content Include="Fonts\sans\ttf\IRANSansWeb_Medium.ttf" />
+    <Content Include="Fonts\sans\ttf\IRANSansWeb_UltraLight.ttf" />
+    <Content Include="Fonts\sans\woff2\IRANSansWeb.woff2" />
+    <Content Include="Fonts\sans\woff2\IRANSansWeb_Bold.woff2" />
+    <Content Include="Fonts\sans\woff2\IRANSansWeb_Light.woff2" />
+    <Content Include="Fonts\sans\woff2\IRANSansWeb_Medium.woff2" />
+    <Content Include="Fonts\sans\woff2\IRANSansWeb_UltraLight.woff2" />
+    <Content Include="Fonts\sans\woff\IRANSansWeb.woff" />
+    <Content Include="Fonts\sans\woff\IRANSansWeb_Bold.woff" />
+    <Content Include="Fonts\sans\woff\IRANSansWeb_Light.woff" />
+    <Content Include="Fonts\sans\woff\IRANSansWeb_Medium.woff" />
+    <Content Include="Fonts\sans\woff\IRANSansWeb_UltraLight.woff" />
+    <Content Include="Fonts\yekan\eot\iranyekanwebblack.eot" />
+    <Content Include="Fonts\yekan\eot\iranyekanwebbold.eot" />
+    <Content Include="Fonts\yekan\eot\iranyekanwebextrablack.eot" />
+    <Content Include="Fonts\yekan\eot\iranyekanwebextrabold.eot" />
+    <Content Include="Fonts\yekan\eot\iranyekanweblight.eot" />
+    <Content Include="Fonts\yekan\eot\iranyekanwebmedium.eot" />
+    <Content Include="Fonts\yekan\eot\iranyekanwebregular.eot" />
+    <Content Include="Fonts\yekan\eot\iranyekanwebthin.eot" />
+    <Content Include="Fonts\yekan\ttf\iranyekanwebblack.ttf" />
+    <Content Include="Fonts\yekan\ttf\iranyekanwebbold.ttf" />
+    <Content Include="Fonts\yekan\ttf\iranyekanwebextrablack.ttf" />
+    <Content Include="Fonts\yekan\ttf\iranyekanwebextrabold.ttf" />
+    <Content Include="Fonts\yekan\ttf\iranyekanweblight.ttf" />
+    <Content Include="Fonts\yekan\ttf\iranyekanwebmedium.ttf" />
+    <Content Include="Fonts\yekan\ttf\iranyekanwebregular.ttf" />
+    <Content Include="Fonts\yekan\ttf\iranyekanwebthin.ttf" />
+    <Content Include="Fonts\yekan\woff\iranyekanwebblack.woff" />
+    <Content Include="Fonts\yekan\woff\iranyekanwebbold.woff" />
+    <Content Include="Fonts\yekan\woff\iranyekanwebextrablack.woff" />
+    <Content Include="Fonts\yekan\woff\iranyekanwebextrabold.woff" />
+    <Content Include="Fonts\yekan\woff\iranyekanweblight.woff" />
+    <Content Include="Fonts\yekan\woff\iranyekanwebmedium.woff" />
+    <Content Include="Fonts\yekan\woff\iranyekanwebregular.woff" />
+    <Content Include="Fonts\yekan\woff\iranyekanwebthin.woff" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Feature.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\FeatureEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\FeatureValue.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Tree.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Filters.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Gallery.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Review.cshtml" />
+    <Content Include="Areas\Admin\Views\User\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\List.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Settings.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\Contact.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\Delivery.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\Page.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\Settings.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\SocialNetwork.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\Tariff.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductFilter\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductFilter\List.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductFilter\Value.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Invoice\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Invoice\List.cshtml" />
+    <Content Include="Areas\Admin\Views\MessageBox\ContactUsList.cshtml" />
+    <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\News\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Faq\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Faq\List.cshtml" />
+    <Content Include="Areas\Admin\Views\FaqCategory\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\FaqCategory\List.cshtml" />
+    <Content Include="Areas\Admin\Views\SpecialProject\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SpecialProject\List.cshtml" />
+    <Content Include="Areas\Admin\Views\SpecialProject\Gallery.cshtml" />
+    <Content Include="Areas\Admin\Views\SpecialProject\AddGallery.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroup\Access.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroup\AssignGroup.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroup\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UserGroup\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Pagination.cshtml" />
+    <Content Include="Areas\Admin\Views\Coupon\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Coupon\List.cshtml" />
+    <Content Include="Areas\Admin\Views\MessageBox\DesignerList.cshtml" />
+    <Content Include="Areas\Admin\Views\MessageBox\WorkWithUsList.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery.ez-plus.js" />
+    <Content Include="Scripts\jquery.general.js" />
+    <Content Include="Scripts\jqueryui\jquery-ui.js" />
+    <Content Include="Scripts\jqueryui\jquery-ui.min.js" />
+    <Content Include="Scripts\jsrender.js" />
+    <Content Include="Scripts\jsrender.min.js" />
+    <Content Include="Scripts\jstree-3.3.8\demo\basic\index.html" />
+    <Content Include="Scripts\jstree-3.3.8\dist\jstree.js" />
+    <Content Include="Scripts\jstree-3.3.8\dist\jstree.min.js" />
+    <Content Include="Scripts\jstree-3.3.8\dist\themes\default-dark\32px.png" />
+    <Content Include="Scripts\jstree-3.3.8\dist\themes\default-dark\40px.png" />
+    <Content Include="Scripts\jstree-3.3.8\dist\themes\default-dark\style.css" />
+    <Content Include="Scripts\jstree-3.3.8\dist\themes\default-dark\style.min.css" />
+    <Content Include="Scripts\jstree-3.3.8\dist\themes\default-dark\throbber.gif" />
+    <Content Include="Scripts\jstree-3.3.8\dist\themes\default\32px.png" />
+    <Content Include="Scripts\jstree-3.3.8\dist\themes\default\40px.png" />
+    <Content Include="Scripts\jstree-3.3.8\dist\themes\default\style.css" />
+    <Content Include="Scripts\jstree-3.3.8\dist\themes\default\style.min.css" />
+    <Content Include="Scripts\jstree-3.3.8\dist\themes\default\throbber.gif" />
+    <Content Include="Scripts\jstree-3.3.8\gruntfile.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\intro.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.changed.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.checkbox.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.conditionalselect.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.contextmenu.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.dnd.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.massload.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.search.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.sort.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.state.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.types.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.unique.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\jstree.wholerow.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\misc.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\outro.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\sample.js" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\default-dark\32px.png" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\default-dark\40px.png" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\default-dark\style.css" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\default-dark\throbber.gif" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\default\32px.png" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\default\40px.png" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\default\style.css" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\default\throbber.gif" />
+    <Content Include="Scripts\jstree-3.3.8\src\vakata-jstree.js" />
+    <Content Include="Scripts\jstree-3.3.8\test\unit\index.html" />
+    <Content Include="Scripts\jstree-3.3.8\test\unit\libs\qunit.css" />
+    <Content Include="Scripts\jstree-3.3.8\test\unit\libs\qunit.js" />
+    <Content Include="Scripts\jstree-3.3.8\test\unit\test.js" />
+    <Content Include="Scripts\jstree-3.3.8\test\visual\desktop\index.html" />
+    <Content Include="Scripts\jstree-3.3.8\test\visual\mobile\index.html" />
+    <Content Include="Scripts\jstree-3.3.8\test\visual\screenshots\desktop\.png" />
+    <Content Include="Scripts\jstree-3.3.8\test\visual\screenshots\desktop\desktop.png" />
+    <Content Include="Scripts\jstree-3.3.8\test\visual\screenshots\desktop\home.png" />
+    <Content Include="Scripts\jstree-3.3.8\test\visual\screenshots\mobile\.png" />
+    <Content Include="Scripts\jstree-3.3.8\test\visual\screenshots\mobile\home.png" />
+    <Content Include="Scripts\jstree-3.3.8\test\visual\screenshots\mobile\mobile.png" />
+    <Content Include="Scripts\leaflet-1.5.1\images\layers-2x.png" />
+    <Content Include="Scripts\leaflet-1.5.1\images\layers.png" />
+    <Content Include="Scripts\leaflet-1.5.1\images\marker-icon-2x.png" />
+    <Content Include="Scripts\leaflet-1.5.1\images\marker-icon.png" />
+    <Content Include="Scripts\leaflet-1.5.1\images\marker-shadow.png" />
+    <Content Include="Scripts\leaflet-1.5.1\leaflet-src.esm.js" />
+    <Content Include="Scripts\leaflet-1.5.1\leaflet-src.js" />
+    <Content Include="Scripts\leaflet-1.5.1\leaflet.css" />
+    <Content Include="Scripts\leaflet-1.5.1\leaflet.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\number-only.js" />
+    <Content Include="Scripts\number-text.js" />
+    <Content Include="Scripts\packery.pkgd.min.js" />
+    <Content Include="Scripts\persianDate\persian-date.js" />
+    <Content Include="Scripts\persianDate\persian-datepicker-0.4.5.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\jquery.mCustomScrollbar.css" />
+    <Content Include="Scripts\scrollbar-3.1.5\jquery.mCustomScrollbar.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\jquery.mCustomScrollbar.min.css" />
+    <Content Include="Scripts\scrollbar-3.1.5\js\minified\jquery-1.11.0.min.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\js\minified\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\js\minified\jquery-2.1.0.min.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\js\minified\jquery-ui-1.10.4.min.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\js\minified\jquery.mCustomScrollbar.min.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\js\minified\jquery.mousewheel-3.0.6.min.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\js\minified\jquery.mousewheel.min.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\js\uncompressed\jquery.mCustomScrollbar.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\js\uncompressed\jquery.mousewheel-3.0.6.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\js\uncompressed\jquery.mousewheel.js" />
+    <Content Include="Scripts\scrollbar-3.1.5\LICENSE.txt" />
+    <Content Include="Scripts\scrollbar-3.1.5\mCSB_buttons.png" />
+    <Content Include="Scripts\site\index.js" />
+    <Content Include="Scripts\site\main.js" />
+    <Content Include="Scripts\site\site.shipping.js" />
+    <Content Include="Scripts\template.js" />
+    <Content Include="Scripts\uikit-icons.js" />
+    <Content Include="Scripts\uikit-icons.min.js" />
+    <Content Include="Scripts\uikit.js" />
+    <Content Include="Scripts\uikit.min.js" />
+    <Content Include="Styles\admin.css" />
+    <Content Include="Styles\app\app.document.css" />
+    <Content Include="Styles\app\app.product-filter.css" />
+    <Content Include="Styles\app\app.product.css" />
+    <Content Include="Styles\general.css" />
+    <Content Include="Styles\jqueryui\jquery-ui.css" />
+    <Content Include="Styles\jqueryui\jquery-ui.min.css" />
+    <Content Include="Styles\jqueryui\jquery-ui.structure.css" />
+    <Content Include="Styles\jqueryui\jquery-ui.structure.min.css" />
+    <Content Include="Styles\jqueryui\jquery-ui.theme.css" />
+    <Content Include="Styles\jqueryui\jquery-ui.theme.min.css" />
+    <Content Include="Styles\persian-datepicker.css" />
+    <Content Include="Styles\site.css" />
+    <Content Include="Styles\site\index.css" />
+    <Content Include="Styles\site\site.shipping.css" />
+    <Content Include="Styles\theme.css" />
+    <Content Include="Styles\uikit-override.css" />
+    <Content Include="Styles\uikit-rtl.css" />
+    <Content Include="Styles\uikit.css" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\LocalizationAttribute.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BrandController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CouponController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FaqCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FaqController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InvoiceController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MainPageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MessageBoxController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductFilterController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SiteController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SliderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SpecialProjectController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserGroupController.cs" />
+    <Compile Include="Common\CaptchaImage.cs" />
+    <Compile Include="Controllers\AboutUsController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ContactUsController.cs" />
+    <Compile Include="Controllers\DesignerController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\SpecialProjectController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WorkWithUsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource\Translation.fa.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Translation.fa.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\Translation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Translation.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\fancybox.3.5.7\.github\ISSUE_TEMPLATE\bug_report.md" />
+    <Content Include="Scripts\fancybox.3.5.7\.github\ISSUE_TEMPLATE\feature_request.md" />
+    <Content Include="Scripts\fancybox.3.5.7\.github\ISSUE_TEMPLATE\question.md" />
+    <Content Include="Scripts\fancybox.3.5.7\.gitignore" />
+    <Content Include="Scripts\fancybox.3.5.7\bower.json" />
+    <Content Include="Scripts\fancybox.3.5.7\package.json" />
+    <Content Include="Scripts\fancybox.3.5.7\README.md" />
+    <Content Include="Scripts\file.upload.9.21.0\.gitignore" />
+    <Content Include="Scripts\file.upload.9.21.0\.jshintrc" />
+    <Content Include="Scripts\file.upload.9.21.0\.npmignore" />
+    <Content Include="Scripts\file.upload.9.21.0\bower.json" />
+    <Content Include="Scripts\file.upload.9.21.0\CONTRIBUTING.md" />
+    <Content Include="Scripts\file.upload.9.21.0\package.json" />
+    <Content Include="Scripts\file.upload.9.21.0\README.md" />
+    <Content Include="Scripts\file.upload.9.21.0\server\gae-go\app.yaml" />
+    <Content Include="Scripts\file.upload.9.21.0\server\gae-go\app\main.go" />
+    <Content Include="Scripts\file.upload.9.21.0\server\gae-python\app.yaml" />
+    <Content Include="Scripts\file.upload.9.21.0\server\gae-python\main.py" />
+    <Content Include="Scripts\file.upload.9.21.0\server\php\docker-compose.yml" />
+    <Content Include="Scripts\file.upload.9.21.0\server\php\Dockerfile" />
+    <Content Include="Scripts\file.upload.9.21.0\server\php\files\.gitignore" />
+    <Content Include="Scripts\file.upload.9.21.0\server\php\files\.htaccess" />
+    <Content Include="Scripts\froala.editor.2.8.4\bower.json" />
+    <Content Include="Scripts\froala.editor.2.8.4\composer.json" />
+    <Content Include="Scripts\froala.editor.2.8.4\package.json" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jsrender.min.js.map" />
+    <Content Include="Scripts\jstree-3.3.8\.gitignore" />
+    <Content Include="Scripts\jstree-3.3.8\bower.json" />
+    <Content Include="Scripts\jstree-3.3.8\component.json" />
+    <Content Include="Scripts\jstree-3.3.8\composer.json" />
+    <Content Include="Scripts\jstree-3.3.8\demo\basic\root.json" />
+    <Content Include="Scripts\jstree-3.3.8\demo\README.md" />
+    <Content Include="Scripts\jstree-3.3.8\jstree.jquery.json" />
+    <Content Include="Scripts\jstree-3.3.8\LICENSE-MIT" />
+    <Content Include="Scripts\jstree-3.3.8\package.json" />
+    <Content Include="Scripts\jstree-3.3.8\README.md" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\base.less" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\default-dark\style.less" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\default\style.less" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\main.less" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\mixins.less" />
+    <Content Include="Scripts\jstree-3.3.8\src\themes\responsive.less" />
+    <Content Include="Scripts\leaflet-1.5.1\leaflet-src.esm.js.map" />
+    <Content Include="Scripts\leaflet-1.5.1\leaflet-src.js.map" />
+    <Content Include="Scripts\leaflet-1.5.1\leaflet.js.map" />
+    <Content Include="Scripts\scrollbar-3.1.5\.gitignore" />
+    <Content Include="Scripts\scrollbar-3.1.5\bower.json" />
+    <Content Include="Scripts\scrollbar-3.1.5\js\minified\jquery.mCustomScrollbar.min.js.gz" />
+    <Content Include="Scripts\scrollbar-3.1.5\package.json" />
+    <Content Include="Scripts\scrollbar-3.1.5\readme.md" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\User\EditUserProfile.cshtml" />
+    <Content Include="Views\User\ForgetPassword.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\UserProfile.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\_LanguageRequestPath.cshtml" />
+    <Content Include="Views\Cart\Shipping.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Invoice\Payment.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Home\_Product.cshtml" />
+    <Content Include="Views\Home\_Slider.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\SpecialProject\Index.cshtml" />
+    <Content Include="Views\SpecialProject\FractionSpecialProject.cshtml" />
+    <Content Include="Views\Shared\_ProductListTemplate.cshtml" />
+    <Content Include="Views\Shared\_Pagination.cshtml" />
+    <Content Include="Views\Home\_Map.cshtml" />
+    <Content Include="Views\Home\_SiteInfoFooter.cshtml" />
+    <Content Include="Views\Home\_SiteSocialNetwork.cshtml" />
+    <Content Include="Views\ContactUs\Index.cshtml" />
+    <Content Include="Views\Shared\_Captcha.cshtml" />
+    <Content Include="Views\AboutUs\Index.cshtml" />
+    <Content Include="Views\Home\Export.cshtml" />
+    <Content Include="Views\Home\Solicitorship.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Home\_BackgroundImage.cshtml" />
+    <Content Include="Views\Home\_Category.cshtml" />
+    <Content Include="Views\WorkWithUs\Index.cshtml" />
+    <Content Include="Views\Solicitorship\Index.cshtml" />
+    <Content Include="Views\Designer\Index.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\FractionNews.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\AboutUs\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\Slider\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Asefian.Common\Asefian.Common.csproj">
+      <Project>{C9E4288E-1135-466B-851C-08921F82D392}</Project>
+      <Name>Asefian.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Asefian.Model\Asefian.Model.csproj">
+      <Project>{516EC39B-68A5-4080-8F13-9E0DE5D53FB4}</Project>
+      <Name>Asefian.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\Translation.fa.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Translation.fa.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource\Translation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Translation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50841</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44387/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

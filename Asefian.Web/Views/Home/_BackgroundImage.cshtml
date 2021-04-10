@@ -1,0 +1,15 @@
+﻿@model Asefian.Model.Context.Core.Slider
+
+@if (Model != null)
+{
+    <div class="uk-background-fixed uk-margin">
+           <div class="uk-background-fixed uk-background-center-center uk-height-medium uk-width-large" style="background-image: url(/upload/image/resize/1000x1000/@Model.FileId/@Model.FileName);width:100%;background-repeat: no-repeat"></div>
+    </div>
+}
+else
+{
+    <div class="uk-text-center uk-margin" style="background-color:#c6c1c12b;">
+        <p>عکسی برای اسلایدر ثابت تعریف نشده است.</p>
+        <img class="uk-height-medium" src="~/Images/no-image.png" />
+    </div>
+}

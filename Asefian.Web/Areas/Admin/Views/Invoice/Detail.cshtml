@@ -1,0 +1,394 @@
+﻿@model Nig.Model.Context.Financial.Invoice
+@{
+    ViewBag.Title = "فاکتور شماره " + Model.InvoiceNo;
+}
+
+<style type="text/css">
+
+    strong i {
+        width: 22px;
+        text-align: center;
+    }
+
+    #logList .table-cell, #logList .table-head {
+        border: solid 1px #E5E5E5;
+    }
+
+    .select {
+        cursor: pointer;
+        padding: 0 10px;
+    }
+
+    .status-item {
+        padding: 10px;
+    }
+
+        .status-item i:not(.fa-mouse-pointer) {
+            width: 25px;
+            text-align: center;
+        }
+
+        .status-item i.fa-mouse-pointer {
+            color: #1976d2;
+        }
+</style>
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/invoice/list">لیست فاکتور ها</a></li>
+            <li><a href="/admin/invoice/@Model.Id">فاکتور شماره @Model.InvoiceNo.ToPersianNumber()</a></li>
+        </ul>
+    </div>
+
+    <div class="content relative">
+        <h4>شماره فاکتور: @Model.InvoiceNo.ToPersianNumber() <button id="btnChangeStatus" class="uk-button uk-button-primary flol" type="button"><i class="fal fa-sliders-h"></i> تغییر وضعیت</button></h4>
+        <hr class="uk-divider-icon" />
+        <div id="data" data-url="/admin/invoice/loadDetail/@Model.Id" loader-box=".content">
+        </div>
+    </div>
+</div>
+
+<div id="modalAddress" uk-modal>
+    <div id="address-container" class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">تغییر آدرس</h2>
+        <div>
+            <div id="listAddress" data-url="/admin/user/listaddress/@Model.UserId" loader-box="#address-container" data-template="#templateAddress"></div>
+        </div>
+        <p class="uk-text-left uk-margin-bottom">
+            <button id="btnSaveAddress" class="uk-button uk-button-primary" type="button">ذخیره</button>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">لغو</button>
+        </p>
+    </div>
+</div>
+
+<div id="modalPayment" uk-modal>
+    <div id="modalPaymentBody" class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">ثبت پرداختی کاربر</h2>
+        <div class="m-bottom-20">
+            <div>
+                <input id="txtPrice" type="tel" class="uk-input number-only money-separator" placeholder="مبلغ مورد نظر را وارد کنید" value="@Model.UnpaidPrice.ToString("N0")" />
+            </div>
+        </div>
+        <p class="uk-text-left uk-margin-bottom">
+            <button id="btnSavePayment" class="uk-button uk-button-primary" type="button">ثبت</button>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">لغو</button>
+        </p>
+    </div>
+</div>
+
+<div id="modalStatus" uk-modal>
+    <div id="modalStatusBody" class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">تغییر وضعیت</h2>
+        <div class="m-bottom-20">
+            <div class="status-item blue">
+                <i class="fal fa-file-invoice"></i> فاکتور شده
+                <span class="select flol" data-value="3"><i class="fas fa-mouse-pointer"></i></span>
+            </div>
+            <div class="status-item blue">
+                <i class="fal fa-tools"></i> در حال آماده سازی
+                <span class="select flol" data-value="4"><i class="fas fa-mouse-pointer"></i></span>
+            </div>
+            <div class="status-item blue">
+                <i class="far fa-box-full"></i> آماده ارسال
+                <span class="select flol" data-value="5"><i class="fas fa-mouse-pointer"></i></span>
+            </div>
+            <div class="status-item green">
+                <i class="far fa-truck"></i> ارسال شده
+                <span class="select flol" data-value="6"><i class="fas fa-mouse-pointer"></i></span>
+            </div>
+            <div class="status-item green">
+                <i class="far fa-receipt"></i> تحویل شده
+                <span class="select flol" data-value="7"><i class="fas fa-mouse-pointer"></i></span>
+            </div>
+            <div class="status-item red">
+                <i class="far fa-times"></i> لغو شده
+                <span class="select flol" data-value="8"><i class="fas fa-mouse-pointer"></i></span>
+            </div>
+            <div class="status-item red">
+                <i class="far fa-trash"></i> حذف شده
+                <span class="select flol" data-value="9"><i class="fas fa-mouse-pointer"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#data").list();
+
+            $(".select").on("click", function () {
+                var status = $(this).attr("data-value");
+
+                var entity = {
+                    invoiceId: @Model.Id,
+                    statusId: status,
+                    description: null
+                }
+                boxLoader("#modalStatusBody", true);
+                backgroundPost("/admin/invoice/changeStatus", entity, function (response) {
+                    boxLoader("#modalStatusBody", false);
+                    if (response.status == 200) {
+                        callbackAlert(response.message, function () {
+                            $("#data").list();
+                        });
+                    }
+                    else {
+                    alert(response.message);
+                    }
+                });
+            });
+
+            $(document).on("click", "#btnChangeAddress", function () {
+                UIkit.modal($("#modalAddress")).show();
+                $("#listAddress").list();
+            });
+
+            $(document).on("click", ".submit-payment", function () {
+                UIkit.modal($("#modalPayment")).show();
+            });
+
+            $("#btnChangeStatus").on("click", function () {
+                UIkit.modal($("#modalStatus")).show();
+            });
+
+            $("#btnSaveAddress").on("click", function () {
+                var entity = {
+                    invoiceId: @Model.Id,
+                    addressId: $("[name=addressId]:checked").val()
+                }
+
+                boxLoader("#address-container", true);
+                backgroundPost("/admin/invoice/changeAddress", entity, function (response) {
+                    boxLoader("#address-container", false);
+                    if (response.status == 200) {
+                        callbackAlert(response.message, function () {
+                            UIkit.modal($("#modalAddress")).hide();
+                            $("#data").list();
+                        });
+                    }
+                    else {
+                        alert(response.message);
+                    }
+                });
+            });
+
+            $("#btnSavePayment").on("click", function () {
+                var entity = {
+                    invoiceId: @Model.Id,
+                    price: removeSeparator($("#txtPrice").val())
+                }
+
+                boxLoader("#modalPaymentBody", true);
+                backgroundPost("/admin/invoice/invoicePaid", entity, function (response) {
+                    boxLoader("#modalPaymentBody", false);
+                    if (response.status == 200) {
+                        callbackAlert(response.message, function () {
+                            UIkit.modal($("#modalPayment")).hide();
+                            $("#data").list();
+                        });
+                    }
+                    else {
+                        alert(response.message);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script id="template" type="text/x-jsrender">
+        <ul uk-accordion="collapsible: false">
+            <li>
+                <a class="uk-accordion-title" href="#">مشخصات فاکتور</a>
+                <div class="uk-accordion-content">
+                    <div id="invoiceDetail" style="padding: 0 7px;">
+                        <div class="uk-child-width-1-2 uk-grid-margin" uk-grid>
+                            <div class="m-top-20">
+                                <strong class="v-middle"><i class="fal fa-heartbeat v-middle"></i> وضعیت:</strong>
+
+                                {{if invoiceStatusId == 1 || invoiceStatusId == 2 || invoiceStatusId == 3 || invoiceStatusId == 4 || invoiceStatusId == 5}}
+                                <span class="uk-label bg-blue">{{:invoiceStatusTitle}}</span>
+                                {{else  invoiceStatusId == 6 || invoiceStatusId == 7}}
+                                <span class="uk-label bg-green">{{:invoiceStatusTitle}}</span>
+                                {{else  invoiceStatusId == 8 || invoiceStatusId == 9}}
+                                <span class="uk-label bg-red">{{:invoiceStatusTitle}}</span>
+                                {{/if}}
+                            </div>
+
+                            <div class="m-top-20">
+                                <strong><i class="fal fa-calendar-check v-middle"></i> تاریخ ثبت سفارش: </strong>
+                                <span class="ltr">{{:~fa(PersianCreateDate)}}</span>
+                            </div>
+
+                            <div class="m-top-20">
+                                <strong><i class="fal fa-money-bill v-middle"></i> مبلغ: </strong>
+                                <span class="ltr">{{:~seperatorFa(price)}} @Nig.Model.Metadata.NigMetadata.CurrencyName</span>
+                            </div>
+
+                            <div class="m-top-20">
+                                <strong><i class="fal fa-truck v-middle"></i> هزینه ارسال: </strong>
+                                {{if deliveryPrice > 0}}
+                                <span class="ltr">{{:~seperatorFa(deliveryPrice)}} @Nig.Model.Metadata.NigMetadata.CurrencyName</span>
+                                {{else}}
+                                <span class="ltr">رایگان</span>
+                                {{/if}}
+                            </div>
+
+                            <div class="m-top-20">
+                                <strong class="v-middle"><i class="fal fa-credit-card v-middle"></i> نحوه پرداخت:</strong>
+                                {{:paymentTypeTitle}}
+                            </div>
+
+                            <div class="m-top-20">
+                                <strong class="v-middle"><i class="fal fa-credit-card-front v-middle"></i> مانده پرداخت:</strong>
+                                {{if unpaidPrice > 0}}
+                                <span class="red pointer submit-payment" uk-tooltip="ثبت پرداخت">{{:~seperatorFa(unpaidPrice)}} @Nig.Model.Metadata.NigMetadata.CurrencyName</span>
+                                {{else}}
+                                <span>پرداخت شده</span>
+                                {{/if}}
+                            </div>
+
+                            <div class="m-top-20">
+                                <strong><i class="fal fa-user"></i> نام خریدار: </strong>{{:firstName}} {{:lastName}}
+                            </div>
+                            {{if couponCode}}
+                            <div class="m-top-20">
+                                <strong><i class="fal fa-gift-card"></i> کارت هدیه: </strong>{{:couponCode}}
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a class="uk-accordion-title" href="#">مشخصات خریدار</a>
+                <div class="uk-accordion-content">
+                    <button id="btnChangeAddress" type="button" class="uk-button bg-purple white"><i class="far fa-exchange"></i>&nbsp; تغییر آدرس</button>
+
+                    <div uk-grid>
+                        <div class="uk-width-1-3@m m-top-20">
+                            <strong><i class="fal fa-user"></i> نام تحویل گیرنده: </strong>{{:~fa(receiverFullName)}}
+                        </div>
+                        <div class="uk-width-2-3@m m-top-20">
+                            <strong><i class="fal fa-mobile"></i> تلفن تحویل گیرنده: </strong>{{:~fa(receiverMobileNumber)}}
+                        </div>
+                        <div class="uk-width-1-3@m m-top-20">
+                            <strong><i class="fal fa-city"></i> استان: </strong>{{:~fa(provinceTitle)}}
+                        </div>
+                        <div class="uk-width-2-3@m m-top-20">
+                            <strong><i class="fal fa-city"></i> شهر: </strong>{{:~fa(cityTitle)}}
+                        </div>
+                        <div class="uk-width-1-3@m m-top-20">
+                            <strong><i class="fal fa-location"></i> کد پستی: </strong>{{:~fa(postalCode)}}
+                        </div>
+                        <div class="uk-width-2-3@m m-top-20">
+                            <strong><i class="fal fa-home"></i> آدرس: </strong>{{:~fa(address)}}
+                        </div>
+                        <div class="uk-width-1-3@m m-top-20">
+                            <strong><i class="fal fa-truck"></i> نحوه ارسال: </strong>{{:deliveryTypeTitle}}
+                        </div>
+                        <div class="uk-width-2-3@m m-top-20">
+                            {{if deliveryTypeId == @Nig.Model.Context.Financial.Enum.DeliveryType.DeliveryMan.Id}}
+                            <strong><i class="fal fa-calendar"></i> تاریخ تحویل: </strong>{{:~fa(PersianDeliveryDate)}} ساعت: {{:~fa(deliveryTime)}}
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a class="uk-accordion-title" href="#">لیست محصولات</a>
+                <div class="uk-accordion-content">
+                    <div class="table">
+                        {{for detailList}}
+                        <div class="table-row">
+                            <div class="table-cell txt-al-c w85">
+                                <a href="/product/{{:productId}}/{{:productUrlTitle}}">
+                                    {{if fileId}}
+                                    <img id="product-image" src="/upload/file/{{:productFileId}}/{{:productFileName}}" alt="{{:productTitle}}" title="{{:productTitle}}" class="w85">
+                                    {{else}}
+                                    <img id="product-image" src="/images/no-image.png" alt="{{:productTitle}}" title="{{:productTitle}}" class="w85">
+                                    {{/if}}
+                                </a>
+                            </div>
+                            <div class="table-cell v-middle">
+                                <h5 class="no-margin">{{:productTitle}}</h5>
+                                {{if productFeatureId != null}}
+                                <div class="site-text-note">{{:featureTitle}}: {{:productFeatureTitle}}</div>
+                                {{/if}}
+                                <div class="site-text-note">دسته بندی: {{:productCategoryTitle}}</div>
+                                <div class="site-text-note">برند: {{:productBrandTitle}}</div>
+                            </div>
+                            <div class="table-cell v-middle">
+                                <h5 class="no-margin"><span class="site-text-note">تعداد</span> {{:~fa(count)}}</h5>
+                            </div>
+                            <div class="table-cell v-middle w100">
+                                <div class="item-price">{{:~seperatorFa(price)}} @Nig.Model.Metadata.NigMetadata.CurrencyName</div>
+                            </div>
+                        </div>
+                        {{/for}}
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a class="uk-accordion-title" href="#">سابقه سفارش</a>
+                <div class="uk-accordion-content">
+                    <div id="logList" class="table">
+                        <div class="table-row">
+                            <div class="table-head w200 txt-al-c">
+                                تاریخ
+                            </div>
+                            <div class="table-head w150 txt-al-c">
+                                وضعیت
+                            </div>
+                            <div class="table-head w200">
+                                کاربر
+                            </div>
+                            <div class="table-head">
+                                توضیحات
+                            </div>
+                        </div>
+
+                        {{for logList}}
+                        <div class="table-row">
+                            <div class="table-cell txt-al-c ltr">
+                                {{:PersianDate}}
+                            </div>
+                            <div class="table-cell txt-al-c ltr">
+                                {{:statusTitle}}
+                            </div>
+                            <div class="table-cell">
+                                {{:firstName}} {{:lastName}}
+                            </div>
+                            <div class="table-cell">
+                                {{:description}}
+                            </div>
+                        </div>
+                        {{/for}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </script>
+
+    <script id="templateAddress" type="text/x-jsrender">
+        <table style="border-collapse: collapse;">
+            {{for list}}
+            <tr data-city-id="{{:cityId}}" style="border: solid 1px silver;">
+                <td class="v-middle w20 txt-al-l">
+                    <input class="address uk-radio" type="radio" value="{{:id}}" name="addressId" {{if main}} checked {{/if}} />
+                </td>
+                <td style="padding: 10px">
+                    <span class="receiver">
+                        <span class="uk-display-block"><i class="fal fa-user"></i> تحویل گیرنده: {{:~fa(receiverFullName)}} - {{:~fa(receiverMobileNumber)}}</span>
+                        <span class="uk-display-block m-top-7 l-h"><i class="fal fa-building"></i> آدرس: {{:~fa(address)}} - کدپستی: {{:~fa(postalCode)}}</span>
+                    </span>
+                </td>
+            </tr>
+            {{/for}}
+        </table>
+    </script>
+
+}

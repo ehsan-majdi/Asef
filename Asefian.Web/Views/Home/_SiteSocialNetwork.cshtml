@@ -1,0 +1,22 @@
+﻿@model List<Asefian.Model.Context.Core.BaseInformation>
+
+@if (Model.Count(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteInstagram) > 0)
+{
+    <a href="@Model.Single(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteInstagram).Value" class="btn-icon"><i class="fab fa-instagram"></i></a>
+}
+@if (Model.Count(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteTelegram) > 0)
+{
+    <a href="@Model.Single(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteTelegram).Value" class="btn-icon"><i class="fab fa-telegram-plane"></i></a>
+}
+@if (Model.Count(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteFacebook) > 0)
+{
+    <a href="@Model.Single(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteFacebook).Value" class="btn-icon"><i class="fab fa-facebook"></i></a>
+}
+@if (Model.Count(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteYoutube) > 0)
+{
+    <a href="@Model.Single(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteYoutube).Value" class="btn-icon"><i class="fab fa-youtube"></i></a>
+}
+@if (Model.Count(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteTwitter) > 0)
+{
+    <a href="@Model.Single(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteTwitter).Value" class="btn-icon"><i class="fab fa-twitter"></i></a>
+}

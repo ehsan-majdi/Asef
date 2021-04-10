@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "لیست شعب";
+}
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/branch/list">لیست شعب</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-margin">
+            <a href="/admin/branch/add" class="uk-button uk-button-primary"><i class="far fa-plus v-middle"></i>&nbsp; جدید</a>
+        </div>
+        <div id="search-form">
+            <input type="text" class="uk-input search" placeholder="عبارت جستجو" name="word" />
+        </div>
+        <div id="list" class="m-top-20" data-url="/admin/branch/search"></div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="/scripts/app/branch/app.list.js"></script>
+
+    <script id="template" type="text/x-jsrender">
+        {{if list.length > 0}}
+        <div>
+            <table class="uk-table uk-table-striped">
+                <thead>
+                    <tr>
+                        <th class="txt-al-c w50">ترتیب</th>
+                        <th>نام</th>
+                        <th class="w85 txt-al-c">وضعیت</th>
+                        <th class="txt-al-c w85">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{for list}}
+                    <tr>
+                        <td class="txt-al-c">{{:#index + 1}}</td>
+                        <td class="txt-al-r">
+                            <div class="col-pad-top">{{:title}}</div>
+                        </td>
+                        <td>
+                            <div class="col-pad-top txt-al-c">
+                                {{if statusId == 1}}
+                                <span class="uk-label uk-label-success">{{:statusTitle}}</span>
+                                {{else statusId == 2}}
+                                <span class="uk-label uk-label-warning">{{:statusTitle}}</span>
+                                {{else statusId == 3}}
+                                <span class="uk-label uk-label-danger">{{:statusTitle}}</span>
+                                {{/if}}
+                            </div>
+                        </td>
+                        <td class="txt-al-c">
+                            <a href="/admin/branch/edit/{{:id}}" uk-tooltip="ویرایش"><i class="far fa-pencil operation-icon green"></i></a>
+                            <a href="#" class="delete" data-delete-url="/admin/branch/delete/{{:id}}" uk-tooltip="حذف"><i class="far fa-trash-alt operation-icon red"></i></a>
+                        </td>
+                    </tr>
+                    {{/for}}
+                </tbody>
+            </table>
+        </div>
+        {{else}}
+        <h5 class="txt-al-c">موردی یافت نشد.</h5>
+        {{/if}}
+    </script>
+}

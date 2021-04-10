@@ -1,0 +1,20 @@
+﻿@model List<Asefian.Model.Context.Core.BaseInformation>
+
+<div class="uk-container">
+    <ul class="uk-breadcrumb">
+        <li><a href="/"><i class="fal fa-home"></i></a></li>
+        <li><span>@Asefian.Web.Resource.Translation.Solicitorship</span></li>
+    </ul>
+    @{
+        var id = BaseController.GetLanguage().Id;
+    }
+    <div id="main-page-container">
+        @if (Model.Count(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.Solicitorship) > 0)
+        {
+            <div>
+                @Html.Raw(Model.Single(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.Solicitorship && x.LanguageId == BaseController.GetLanguage().Id).Value)
+            </div>
+        }
+    </div>
+
+</div>

@@ -1,0 +1,70 @@
+﻿@model Asefian.Model.Context.Account.User
+@{
+    ViewBag.Title = Model.FirstName + " " + Model.LastName;
+}
+
+
+<div class="uk-container">
+    <ul class="uk-breadcrumb">
+        <li><a href="/"><i class="fal fa-home"></i></a></li>
+        <li><span>@Asefian.Web.Resource.Translation.AccountSettings</span></li>
+    </ul>
+
+    <div class="m-bottom-20" uk-grid>
+        <div class="uk-width-1-2@m">
+            <div class="uk-card uk-card-default uk-card-body">
+                <h5>
+                    <i class="fal fa-user-edit"></i> @Asefian.Web.Resource.Translation.UserInformation
+                    <a class="flol" href="/profile/edit">@Asefian.Web.Resource.Translation.Edit</a>
+                </h5>
+                <hr />
+                <table class="w100p">
+                    <tr>
+                        <td colspan="2">
+                            <span class="site-sec-text">@Asefian.Web.Resource.Translation.FullName</span>
+                            <div class="site-text uk-margin-bottom">@Model.FirstName @Model.LastName</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="site-sec-text">@Asefian.Web.Resource.Translation.Email</span>
+                            <div class="site-text uk-margin-bottom">@Model.Email</div>
+                        </td>
+                        <td>
+                            <span class="site-sec-text">@Asefian.Web.Resource.Translation.Phone</span>
+                            <div class="site-text uk-margin-bottom">@Model.MobileNumber</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        @*<div class="uk-width-1-2@m">
+            <div class="uk-card uk-card-default uk-card-body h100p">
+                <h5><i class="fas fa-heart"></i> علاقه مندی ها</h5>
+                <hr />
+                <div>
+                    @if (Model.UserFavoriteList.Count > 0)
+                    {
+
+                    }
+                    else
+                    {
+                        <h5 class="txt-al-c"><i class="far fa-heart v-middle"></i> لیست علاقه مندی های شما خالی است.</h5>
+                    }
+                </div>
+            </div>
+        </div>*@
+
+        @*<div class="uk-width-1-2@m">
+            <div class="uk-card uk-card-default uk-card-body">
+                <div class="uk-child-width-1-1@l uk-child-width-1-1@m uk-child-width-1-1@s" uk-grid>
+                    <div class="m-top-12"><a href="/invoice/list" class="uk-button"><i class="fal fa-paste v-middle"></i> مشاهده سوابق سفارشات</a></div>
+                    <div class="m-top-12"><a href="/inquiry/list" class="uk-button"><i class="fal fa-paste v-middle"></i> مشاهده سوابق استعلام کالا</a></div>
+                    <div class="m-top-12"><a href="/changePassword" class="uk-button"><i class="fal fa-key v-middle"></i> تغییر رمز عبور</a></div>
+                </div>
+            </div>
+        </div>*@
+
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿@model List<Asefian.Model.ViewModel.Data.SpecialProjectViewModel>
+
+<div class="uk-container">
+    @if (Model.Count > 0)
+    {
+        <div class="uk-width-1-1">
+            <div class="uk-text-center uk-margin">
+                @foreach (var item in Model)
+                {
+                    <a href="@BaseController.MakeLanguageUrl("/fractionspecialproject")/@(item.id)">
+                        <div class="uk-text-center">
+                            <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
+                                <img src="/upload/image/resize/500x500/@item.fileId/@item.fileName">
+                                <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle">
+                                    <p class="uk-h4 uk-margin-remove">@item.title</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>موردی یافت نشد.</p>
+    }
+</div>

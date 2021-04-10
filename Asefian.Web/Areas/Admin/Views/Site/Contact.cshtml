@@ -1,0 +1,110 @@
+﻿@model List<Asefian.Model.Context.Core.BaseInformation>
+@{
+    ViewBag.Title = "اطلاعات تماس";
+}
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/site/settings">تنظیمات</a></li>
+            <li>اطلاعات تماس</li>
+        </ul>
+    </div>
+    <div class="uk-margin">
+        <a style="background-color:#0abb87;color:white" id="btnAddTelephone" class="uk-button uk-width-1-6">تلفن <i class="fal fa-plus"></i></a>
+    </div>
+    <div class="content">
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-1@m uk-child-width-1-1@l uk-flex-center" uk-grid>
+            <form id="frmSettings" class="form" action="/admin/site/saveContact" data-load-success="loadComplete" method="post" data-before-save="beforeSave" data-success="saveComplete" loader="1">
+                <ul uk-tab="connect: #translationList">
+                    @foreach (var item in Asefian.Model.Context.Language.GetList())
+                    {
+                        <li class="languageId" data-id="@item.Id"><a href="#">@item.PersianTitle</a></li>
+                    }
+                </ul>
+                <ul id="translationList" class="uk-switcher uk-margin" data-list="translations">
+                    <li data-list-form>
+                        <input name="languageId" type="hidden" value="1" key lock />
+                        <label class="uk-form-label" for="txtAddress">آدرس</label>
+                        <div class="uk-form-controls">
+                            <textarea id="txtAddress" type="text" class="uk-textarea" name="value">@ViewBag.PersianData</textarea>
+                        </div>
+                    </li>
+                    <li data-list-form>
+                        <input name="languageId" type="hidden" value="2" key lock />
+                        <label class="uk-form-label" for="txtAddress">آدرس</label>
+                        <div class="uk-form-controls">
+                            <textarea id="txtAddress" type="text" class="uk-textarea" name="value">@ViewBag.EnglishData</textarea>
+                        </div>
+                    </li>
+                </ul>
+                @{
+                    var telephone = Model.SingleOrDefault(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SitePhoneNumber)?.Value.Split('%');
+                    if (telephone != null)
+                    {
+                        foreach (var item in telephone)
+                        {
+                            <div class="uk-margin telephone">
+                                <span style="" class="fa fa-times delete"></span>
+                                <label class="uk-form-label" for="txtPhoneNumber">تلفن</label>
+                                <div class="uk-form-controls">
+                                    <input type="tel" id="" class="uk-input txtPhoneNumber " name="phoneNumber" value="@item" />
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+
+                <div id="telephoneContent"></div>
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtFax">فکس</label>
+                    <div class="uk-form-controls">
+                        <input type="tel" id="txtFax" class="uk-input" name="fax" value="@(Model.SingleOrDefault(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteFax)?.Value)" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtEmail">ایمیل</label>
+                    <div class="uk-form-controls">
+                        <input type="email" id="txtEmail" class="uk-input" name="email" value="@(Model.SingleOrDefault(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteEmail)?.Value)" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtLatitude">عرض جغرافیایی <sub>(Latitude)</sub></label>
+                    <div class="uk-form-controls">
+                        <input type="text" id="txtLatitude" class="uk-input" name="latitude" value="@(Model.SingleOrDefault(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteLocation)?.Value?.Split('/')[0])" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtLongitude">طول جغرافیایی <sub>(Longitude)</sub></label>
+                    <div class="uk-form-controls">
+                        <input type="text" id="txtLongitude" class="uk-input" name="longitude" value="@(Model.SingleOrDefault(x => x.Key == Asefian.Model.Metadata.BaseInformationKey.SiteLocation)?.Value?.Split('/')[1])" />
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="" lock />
+                <div class="uk-margin">
+                    <button id="btnSubmit" type="submit" class="uk-button uk-button-primary">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="/scripts/app/site/app.contact.js"></script>
+
+    <script id="telephoneTemplate" type="text/html">
+        <div class="uk-margin telephone detail">
+            <span style="" class="fa fa-times delete"></span>
+            <label class="uk-form-label" for="txtPhoneNumber"> تلفن </label>
+            <div class="uk-form-controls">
+                <div class="uk-inline uk-width-1-1 ltr">
+                    <input type="tel" class="uk-input txtPhoneNumber" name="phoneNumber" />
+                </div>
+            </div>
+        </div>
+    </script>
+}

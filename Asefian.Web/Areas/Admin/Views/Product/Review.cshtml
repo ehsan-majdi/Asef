@@ -1,0 +1,39 @@
+﻿@Styles.Render("~/styles/editor")
+@{ 
+    ViewBag.Title = "نقد و بررسی محصول";
+}
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/product/list">لیست محصولات</a></li>
+            <li><a href="/admin/product/edit/@ViewBag.Id">محصول</a></li>
+            <li><a href="/admin/product/review/@ViewBag.Id">نقد و بررسی محصول</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-1@m uk-child-width-1-1@l uk-flex-center" uk-grid>
+            <form id="frmReview" class="form" action="/admin/product/saveReview" data-load="/admin/product/loadReview" method="post" data-success="saveComplete" loader="1">
+
+                <input type="hidden" name="id" value="@ViewBag.Id" lock />
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtReview">متن نقد و بررسی</label>
+                    <div class="uk-form-controls">
+                        <textarea id="txtReview" type="text" name="review" data-validate="required"></textarea>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <button id="btnSubmit" type="submit" class="uk-button uk-button-primary uk-width-1-1">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/editor")
+    <script type="text/javascript" src="/scripts/app/product/app.review.js"></script>
+}

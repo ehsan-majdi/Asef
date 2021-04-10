@@ -1,0 +1,71 @@
+﻿@Styles.Render("~/styles/editor")
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/faqcategory/list">لیست دسته بندی سوالات متداول</a></li>
+            @if (ViewBag.Id != null)
+            {
+                <li><a id="lnkParentList" href="#">لیست سوالات</a></li>
+                <li><a href="/admin/faq/edit/@ViewBag.Id">ویرایش سوالات متداول</a></li>
+            }
+            else
+            {
+                <li><a href="/admin/faq/list/@ViewBag.FaqCategoryId">لیست سوالات</a></li>
+                <li><a href="/admin/faq/add/@ViewBag.FaqCategoryId">سوالات متداول جدید</a></li>
+            }
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-1@m uk-child-width-1-1@l uk-flex-center" uk-grid>
+            <form id="frmFaq" class="form" action="/admin/faq/save" data-load="/admin/faq/load" method="post" data-success="saveComplete" loader="1">
+
+                <input type="hidden" name="id" value="@ViewBag.Id" lock />
+                <input type="hidden" name="faqCategoryId" value="@ViewBag.FaqCategoryId" />
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtOrder">ترتیب</label>
+                    <div class="uk-form-controls">
+                        <input id="txtOrder" class="uk-input" type="text" name="order" data-validate="required, number" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtQuestion">سوال</label>
+                    <div class="uk-form-controls">
+                        <input id="txtQuestion" class="uk-input" type="text" name="question" data-validate="required" />
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtAnswer">پاسخ</label>
+                    <div class="uk-form-controls">
+                        <textarea id="txtAnswer" type="text" name="answer" data-validate="required"></textarea>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="cmbStatus">وضعیت</label>
+                    <div class="uk-form-controls">
+                        <select id="cmbStatus" class="uk-select" name="statusId" data-validate="required">
+                            <option value="">...</option>
+                            <option value="1">فعال</option>
+                            <option value="2">غیرفعال</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <button id="btnSubmit" type="submit" class="uk-button uk-button-primary uk-width-1-1">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/editor")
+    <script type="text/javascript" src="/scripts/app/faq/app.save.js"></script>
+}

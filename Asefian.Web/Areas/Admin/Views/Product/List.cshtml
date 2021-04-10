@@ -1,0 +1,339 @@
+﻿@{
+    ViewBag.Title = "لیست محصولات";
+}
+@Styles.Render("~/styles/fancy")
+@Styles.Render("~/styles/editor")
+<link href="/styles/app/app.product.css" rel="stylesheet" />
+<style>
+    .pop {
+        cursor: pointer;
+        position: absolute;
+        left: 0;
+        background-color: red;
+        height: 15px;
+        width: 15px;
+        background-color: rgba(0,0,0,0.2);
+        top: -43px;
+        transition: width 0.5s, height 0.5s,font-size 0.5s,color 1s;
+    }
+
+        .pop:hover {
+            height: 109px;
+            width: 110px;
+            font-size: 100px;
+            color: green
+        }
+
+    .changeStatus {
+        font-weight: bold
+    }
+
+    .uk-table td {
+        padding: 0 12px !important;
+        vertical-align: middle
+    }
+</style>
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/product/list">لیست محصولات</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-margin">
+            <a href="/admin/product/add" class="uk-button uk-button-primary"><i class="far fa-plus v-middle"></i>&nbsp; جدید</a>
+            @*<a href="/admin/documentExit/add" class="uk-button uk-button-secondary flol"><i class="far fa-minus v-middle"></i>&nbsp; سند خروج</a>*@
+        </div>
+        <div class="uk-grid uk-child-width-1-6">
+            <div>
+                <div id="search-form" class="uk-margin">
+                    <label>جستجو</label>
+                    <input type="text" class="uk-input search" placeholder="عبارت جستجو" name="word" />
+                </div>
+            </div>
+            @*<div>
+                <div class="uk-margin">
+                    <label>وضعیت</label>
+                    <select id="statusId" class="uk-select" data-validate="required">
+                        <option value="">...</option>
+                        <option value="1">موجود</option>
+                        <option value="2">ناموجود</option>
+                        <option value="3">غیرفعال</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="uk-margin">
+                    <label>توضیحات</label>
+                    <select id="hasDescription" class="uk-select" data-validate="required">
+                        <option value="">...</option>
+                        <option value="true">دارد</option>
+                        <option value="false">ندارد</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="uk-margin">
+                    <label>فیلتر</label>
+                    <select id="hasFilter" class="uk-select" data-validate="required">
+                        <option value="">...</option>
+                        <option value="true">دارد</option>
+                        <option value="false">ندارد</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                        <label>عکس</label>
+                        <select id="hasPhoto" class="uk-select" data-validate="required">
+                            <option value="">...</option>
+                            <option value="true">دارد</option>
+                            <option value="false">ندارد</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="uk-margin">
+                    <label>حذف فیلتر</label>
+                    <div class="uk-form-controls">
+                        <button id="removeParam" class="uk-button uk-button-danger"><i class="fa fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+        <hr />
+        <div id="list" class="m-top-20" data-url="/admin/product/search"></div>
+    </div>
+</div>
+<div id="gallery-modal" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">گالری</h2>
+        </div>
+        <div class="uk-modal-body">
+            <div class="content">
+                <div>
+                    <div class="uk-width-1-1@s uk-width-1-1@m uk-width-1-1@l">
+                        <hr class="uk-divider-icon">
+                    </div>
+                </div>
+                <div id="gallery-list" class="m-top-20 list" data-url="">
+                </div>
+            </div>
+            <div class="hide">
+                <form id="form" action="/admin/product/addImage" data-success="addImageSuccess">
+                    <input id="hiddenId" type="hidden" name="id" value="" lock />
+                    <input type="hidden" id="hiddenFileId" name="fileId" />
+                    <input type="hidden" id="hiddenFileName" name="fileName" />
+                    <input type="file" id="file" />
+                </form>
+            </div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">بستن</button>
+        </div>
+    </div>
+</div>
+
+<div id="description-modal" uk-modal>
+    <div class="uk-modal-dialog">
+        <form id="frmDescription" action="/admin/product/addDescription" data-success="addDescriptionSuccess">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">توضیحات</h2>
+            </div>
+            <input type="hidden" name="id" id="hiddenDescriptionId" />
+            <div class="uk-modal-body">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtDescription">توضیحات</label>
+                    <div class="uk-form-controls">
+                        <textarea id="txtDescription" class="uk-textarea" name="description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </form>
+        <div class="uk-modal-footer uk-text-right">
+            <button id="btnSubmitDescription" class="uk-button uk-button-primary" type="button">ذخیره</button>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">بستن</button>
+        </div>
+    </div>
+</div>
+
+<div id="addImage-modal" uk-modal>
+    <div class="uk-modal-dialog">
+        <form id="frmAddProductImage" action="/admin/product/addProductImage" data-success="addProductImageSuccess">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">تصویر محصول</h2>
+            </div>
+            <input type="hidden" name="id" id="hiddenProductId" />
+            <div class="uk-modal-body">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtFileName">تصویر</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-image"></i></span>
+                            <input id="hiddenProductFileId" type="hidden" name="productFileId" />
+                            <input id="txtProductFileName" class="uk-input input-ltr-left-icon" type="text" name="productFileName" readonly />
+                            <input id="productFile" type="file" class="hide" />
+                            <span id="productUpload" class="form-icon"><i class="fal fa-upload"></i></span>
+                            <span id="productClearFile" class="form-icon hide"><i class="fal fa-times"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </form>
+        <div class="uk-modal-footer uk-text-right">
+            <button id="btnAddProductImage" class="uk-button uk-button-primary" type="button">ذخیره</button>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">بستن</button>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/scripts/fancy")
+    @Scripts.Render("~/scripts/upload")
+    @Scripts.Render("~/scripts/editor")
+    <script type="text/javascript" src="/scripts/app/product/app.list.js"></script>
+
+    <script id="template" type="text/x-jsrender">
+        {{if list.length > 0}}
+        <div>
+            <table class="uk-table uk-table-striped">
+                <thead>
+                    <tr>
+                        <th class="txt-al-c w50">ترتیب</th>
+                        <th>عنوان</th>
+                        <th>تصویر</th>
+                        <th>موجودی</th>
+                        <th>قیمت</th>
+                        <th>تخفیف</th>
+                        <th class="w85 txt-al-c">وضعیت</th>
+                        @*<th class="w20 txt-al-c">توضیحات</th>*@
+                        <th class="w20 txt-al-c">گالری</th>
+                        <th class="w20 txt-al-c">فیلتر</th>
+                        @*<th class="w20 txt-al-c">نقدوبررسی</th>*@
+                        <th class="w20 txt-al-c">ویرایش</th>
+                        <th class="w20 txt-al-c ">حذف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{for list}}
+                    <tr class="productRow" data-id="{{:id}}" style="height:70px">
+                        <td class="txt-al-c">{{:#index + 1}}</td>
+                        <td class="txt-al-r">
+                            <div class="col-pad-top">{{:title}}</div>
+                        </td>
+                        <td uk-toggle="target:#addImage-modal" class="txt-al-r addProductImage">
+                            {{if fileId}}
+                            <img style="width:60px" src="/upload/image/resize/100x100/{{:fileId}}/{{:fileName}}" class="col-pad-top" />
+                            {{else}}
+                            <img style="width:60px" src="/Images/no-image.png" class="col-pad-top" />
+                            {{/if}}
+                        </td>
+                        <td class="txt-al-r">
+                            <div class="col-pad-top">{{:count}}</div>
+                        </td>
+                        <td class="txt-al-r">
+                            <div class="col-pad-top">{{:price}}</div>
+                        </td>
+                        <td class="txt-al-r">
+                            <div class="col-pad-top">{{:discount}}</div>
+                        </td>
+                        <td style="cursor: pointer" class="txt-al-c">
+                            <div class="uk-inline">
+                                {{if statusId == 1}}
+                                <span data-id="{{:id}}" type="button" class="uk-label uk-label-success">{{:statusTitle}}</span>
+                                {{else statusId == 2}}
+                                <span data-id="{{:id}}" type="button" class="uk-label uk-label-warning">{{:statusTitle}}</span>
+                                {{else statusId == 3}}
+                                <span data-id="{{:id}}" type="button" class="uk-label uk-label-danger">{{:statusTitle}}</span>
+                                {{/if}}
+                                <div uk-dropdown="pos: bottom-center">
+                                    <ul class="uk-nav uk-dropdown-nav">
+                                        <li><a style="color:#32d296" class="changeStatus txt-al-r" data-id="{{:id}}" data-status-id="1" href="#"> موجود</a></li>
+                                        <li><a style="color:#faa05a" class="changeStatus txt-al-r" data-id="{{:id}}" data-status-id="2" href="#"> ناموجود</a></li>
+                                        <li><a style="color:#f0506e" class="changeStatus txt-al-r" data-id="{{:id}}" data-status-id="3" href="#"> غیرفعال</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                        @*<td uk-toggle="target:#description-modal" class="w20 txt-al-c addDescription" data-description="{{:description}}">
+                            {{if description}}
+                            <i style="color:green" class="fa fa-check"></i>
+                            {{else}}
+                            <i style="color:red" class="fa fa-times"></i>
+                            {{/if}}
+                        </td>*@
+                        <td uk-toggle="target:#gallery-modal" class="w20 txt-al-c addGallery">
+                            {{if galleryCount > 0}}
+                            <i style="color:green" class="fa fa-check"></i>
+                            {{else}}
+                            <i style="color:red" class="fa fa-times"></i>
+                            {{/if}}
+                        </td>
+                        <td class="w20 txt-al-c addFilter">
+                            <a href="/admin/product/filters/{{:id}}" target="_blank">
+                                {{if filterCount > 0}}
+                                <i style="color:green" class="fa fa-check"></i>
+                                {{else }}
+                                <i style="color:red" class="fa fa-times"></i>
+                                {{/if}}
+                            </a>
+                        </td>
+                        @*<td class="w20 txt-al-c addFilter">
+                            <a href="/admin/product/review/{{:id}}" target="_blank">
+                                {{if review}}
+                                <i style="color:green" class="fa fa-check"></i>
+                                {{else }}
+                                <i style="color:red" class="fa fa-times"></i>
+                                {{/if}}
+                            </a>
+                        </td>*@
+                        <td>
+                            <a href="/admin/product/edit/{{:id}}"><i class="far fa-pencil operation-icon green"></i></a>
+                        </td>
+                        <td class="txt-al-c">
+                            <a href="#" class="delete" data-delete-url="/admin/product/delete/{{:id}}"><i class="far fa-trash-alt operation-icon red"></i></a>
+                        </td>
+                    </tr>
+                    {{/for}}
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("_Pagination")
+        {{else}}
+        <h5 class="txt-al-c">موردی یافت نشد.</h5>
+        {{/if}}
+    </script>
+    <script id="gallery-template" type="text/x-jsrender">
+        <ul class="uk-thumbnav" uk-margin>
+            {{for list}}
+            <li class="relative">
+                <a href="{{:link}}" class="gallery-file uk-background-cover uk-inline" title="{{:fileName}}" style="background-image: url('{{:link}}');">
+                    <div class="uk-position-cover"></div>
+                </a>
+                <a href="#" class="gallery-del-icon removeGalleryFile" data-id="{{:id}}"><i class="far fa-trash-alt m-top-7"></i></a>
+            </li>
+            {{/for}}
+            <li>
+                <a href="#" class="add add-file">
+                    <div class="uk-inline uk-dark">
+                        <div class="gallery-add-file"></div>
+                        <div class="uk-overlay-default uk-position-cover">
+                            <div class="uk-position-center"><i class="fas fa-plus fa-3x white"></i></div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </script>
+}

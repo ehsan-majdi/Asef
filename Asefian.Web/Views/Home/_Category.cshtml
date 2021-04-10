@@ -1,0 +1,94 @@
+﻿@model List<Asefian.Model.ViewModel.Data.CategoryViewModel>
+
+<style>
+ 
+    .flex-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        float: left;
+    }
+
+    .img-border {
+        margin-top: 36px;
+        border: 1px solid #82642d42;
+        padding: 0;
+        border-radius: 5px;
+    }
+
+    /*.frame {
+        background-color: rgba(0, 0, 0, 0.8);
+        opacity: 0.4;
+    }*/
+
+    .frame span {
+        color: rgb(255, 255, 255);
+        position: relative;
+        z-index: 5555
+    }
+
+    /*.border-child img {
+        padding: 33px;
+    }*/
+
+    .title-product {
+        opacity: 1 !important;
+        color: #000;
+        position: absolute;
+        right: 0;
+        left: 0;
+        background-color: white;
+        margin: 0;
+        bottom: 0;
+    }
+
+    .image-grid {
+        box-shadow: 2px 4px 9px -3px rgba(0,0,0,0.75);
+        padding: 3px;
+        margin:5px 30px;
+        background-color: #82642d42;
+    }
+</style>
+<div class="uk-container">
+    @if (Model.Count > 0)
+    {
+        <div uk-grid style="margin: 0">
+            <div class="uk-width-1-2@l uk-width-1-1@s uk-position-relative uk-text-center img-border uk-inline-clip uk-transition-toggle" tabindex="0">
+                <a class="" href="/product/@(ViewBag.NewProduct.Id)/@ViewBag.NewProduct.Sku">
+                    <img src="/upload/image/resize/350x350/@ViewBag.NewProduct.FileId/@ViewBag.NewProduct.FileName" />
+
+                    <div class="frame uk-position-cover uk-flex uk-flex-center uk-flex-middle"></div>
+                    <div>
+                        <span class="uk-h3 title-product">@Asefian.Web.Resource.Translation.NewProduct</span>
+                    </div>
+                </a>
+            </div>
+            <div class="uk-width-1-2@l" style="margin-top: 24px;">
+                <div class="uk-grid">
+                    @foreach (var item in Model)
+                    {
+                        <div class="uk-width-1-3@l uk-width-1-1@s image-grid">
+                            <a href="/category/@item.categoryId/@item.title">
+                                <div class="border-child uk-position-relative uk-inline-clip uk-transition-toggle" tabindex="0">
+                                    <img src="/upload/image/crop/500x700/@item.fileId/@item.fileName" />
+                                    <div class="frame uk-position-cover uk-flex uk-flex-center uk-flex-middle"></div>
+                                    <div>
+                                        <p class="uk-h3 title-product">@item.title</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="uk-text-center uk-margin" style="background-color:#c6c1c12b;">
+            <p>عکسی برای زیر دسته بندی محصولات تعریف نشده است.</p>
+            <img class="uk-height-medium" src="~/Images/no-image.png" />
+        </div>
+    }
+</div>
+

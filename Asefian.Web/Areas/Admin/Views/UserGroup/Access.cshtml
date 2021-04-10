@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "دسترسی های گروه کاربری";
+}
+
+<style type="text/css">
+    .item {
+        background-color: white;
+        height: 100%;
+    }
+
+        .item label {
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .item .uk-card-header {
+            padding: 0 0 15px 0;
+        }
+</style>
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/usergroup/list">گروه کاربری</a></li>
+            <li><a href="/admin/usergroup/access/@ViewBag.Id">ویرایش دسترسی</a></li>
+        </ul>
+    </div>
+    <form id="frmAccess" action="/admin/usergroup/saveAccessList" method="post" data-load="/admin/usergroup/accessList" loader="1" data-success="saveComplete">
+        <div class="uk-child-width-1-3@m" uk-grid>
+
+            <input type="hidden" name="id" value="@ViewBag.Id" lock />
+            <div>
+                <div class="item uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-header">ادمین</h3>
+                    <div>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Admin"> ادمین</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="item uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-header">صفحه اصلی</h3>
+                    <div>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.MainPage"> تنظیمات صفحه اصلی</label>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="item uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-header">سفارشات</h3>
+                    <div>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Invoice"> سفارشات</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="item uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-header">مالی</h3>
+                    <div>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Coupon"> کوپن</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="item uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-header">محصولات</h3>
+                    <div>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Product"> محصولات</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Filter"> فیلترها</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.DocumentEntry"> سند ورود</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="item uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-header">اخبار و مقالات</h3>
+                    <div>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.News"> اخبار</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Blog"> بلاگ</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Article"> مقالات</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="item uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-header">پشتیبانی</h3>
+                    <div>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Ticket"> تیکت های پشتیبانی</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Message"> صندوق پیام ها</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.NewsLetter"> ایمیل های خبرنامه</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Faq"> سوالات متداول</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="item uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-header">اطلاعات پایه</h3>
+                    <div>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Service"> خدمات</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Category"> دسته بندی</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Brand"> برند</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Branch"> شعبه</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Settings"> تنظیمات</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="item uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-header">کاربران</h3>
+                    <div>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.User"> لیست کاربران</label>
+                        <label><input class="uk-checkbox" type="checkbox" name="permission" value="@Permission.Group"> گروه کاربری</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="btnSubmit" type="button" class="uk-margin uk-button uk-button-primary">ذخیره</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="/scripts/app/usergroup/app.access.js"></script>
+}

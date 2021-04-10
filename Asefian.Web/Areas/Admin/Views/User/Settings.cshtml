@@ -1,0 +1,73 @@
+﻿@model Asefian.Model.ViewModel.Account.UserPrincipal
+@{
+    ViewBag.Title = "ویرایش اطلاعات کاربری";
+}
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/user/settings">تنظیمات کاربر</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l uk-flex-center" uk-grid>
+            <form id="frmSettings" class="form" action="/admin/user/changeInfo" method="post" data-success="saveComplete" loader="1">
+
+                <input type="hidden" name="id" value="@Model.id" lock />
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtFirstName">نام</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-user"></i></span>
+                            <input id="txtFirstName" class="uk-input" type="text" name="firstName" data-validate="required, PersianText" value="@Model.firstName" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtLastName">نام خانوادگی</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-users"></i></span>
+                            <input id="txtLastName" class="uk-input" type="text" name="lastName" data-validate="required, PersianText" value="@Model.lastName" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtMobileNumber">تلفن همراه</label>
+                    <div class="uk-form-controls relative">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-mobile-android"></i></span>
+                            <input id="txtMobileNumber" class="uk-input" type="tel" name="mobileNumber" data-validate="required, mobileNumber" value="@Model.mobileNumber" />
+                        </div>
+                        <div id="loaderMobileNumber" class="form-controls-spinner" uk-spinner></div>
+                        <span id="mobileValid" class="valid-icon"><i class="far fa-check"></i></span>
+                        <span id="mobileInvalid" class="invalid-icon"><i class="far fa-times"></i></span>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtEmail">ایمیل</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-envelope"></i></span>
+                            <input id="txtEmail" class="uk-input" type="text" name="email" data-validate="required, email" value="@Model.email" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <button id="btnSubmit" type="submit" class="uk-button uk-button-primary uk-width-1-1">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="/scripts/app/user/app.settings.js"></script>
+}

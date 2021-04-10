@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "صندوق پیام ها";
+}
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/messagebox/list">صندوق پیام ها</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div id="search-form">
+            <input type="text" class="uk-input search" placeholder="عبارت جستجو" name="word" />
+        </div>
+        <div id="list" class="m-top-20" data-url="/admin/messagebox/search"></div>
+    </div>
+</div>
+
+<div id="message-modal" uk-modal>
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header"><h4 class="uk-modal-title">پیام</h4></div>
+        <div class="uk-modal-body">
+            <input id="hiddenId" type="hidden" value="" />
+            <p id="messageBox"></p>
+        </div>
+        <p class="uk-text-left uk-modal-footer">
+            <button id="btnRead" class="uk-button uk-button-primary" type="button">خواندن پیام</button>
+        </p>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#list").list();
+            setParam('typeId', 2)
+            $(".search").on("keypress", function (event) {
+                if (event.which == 13) {
+                    resetParam('word', $(this).val())
+                }
+            });
+
+            $(document).on("click", ".view-message", function (event) {
+                event.preventDefault();
+                var id = $(this).attr("data-id");
+                backgroundGet("/admin/messagebox/getmessage/" + id, {}, function (response) {
+                    if (response.status === 200) {
+                        $("#hiddenId").val(id);
+                        $("#messageBox").html(response.data.text);
+                        UIkit.modal($("#message-modal")).show();
+                    }
+                    else {
+                        alert(response.message);
+                    }
+                });
+            });
+
+            $("#btnRead").on("click", function (event) {
+                event.preventDefault();
+                var id = $("#hiddenId").val();
+                confirmMessage("آیا از ثبت وضعیت خوانده شده برای این پیام اطمینان دارید؟", function () {
+                    backgroundPost('/admin/messagebox/read/' + id, null, function (response) {
+                        if (response.status == 200) {
+                            UIkit.modal($("#message-modal")).hide();
+                        }
+                    });
+                });
+            });
+
+        });
+
+    </script>
+
+    <script id="template" type="text/x-jsrender">
+        {{if list.length > 0}}
+        <div>
+            <table class="uk-table uk-table-striped">
+                <thead>
+                    <tr>
+                        <th class="txt-al-c w50">ترتیب</th>
+                        <th>نام</th>
+                        <th>تلفن همراه</th>
+                        <th>ایمیل</th>
+                        <th class="txt-al-c">تاریخ</th>
+                        <th class="w85 txt-al-c">وضعیت</th>
+                        <th class="txt-al-c w85">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{for list}}
+                    <tr>
+                        <td class="txt-al-c">{{:#index + 1}}</td>
+                        <td class="txt-al-r">
+                            <div class="col-pad-top">{{:fullName}}</div>
+                        </td>
+                        <td class="txt-al-r">
+                            <div class="col-pad-top">{{:mobileNumber}}</div>
+                        </td>
+                        <td class="txt-al-r">
+                            <div class="col-pad-top">{{:email}}</div>
+                        </td>
+                        <td>
+                            <div class="col-pad-top txt-al-c ltr">{{:PersianCreateDate}}</div>
+                        </td>
+                        <td>
+                            <div class="col-pad-top txt-al-c">
+                                {{if statusId == 1}}
+                                <span class="uk-label">{{:statusTitle}}</span>
+                                {{else statusId == 2}}
+                                <span class="uk-label uk-label-success">{{:statusTitle}}</span>
+                                {{/if}}
+                            </div>
+                        </td>
+                        <td class="txt-al-c">
+                            <a href="#" class="view-message" uk-tooltip="مشاهده پیام" data-id="{{:id}}"><i class="far fa-eye operation-icon green"></i></a>
+                            <a href="#" class="delete" data-delete-url="/admin/messagebox/delete/{{:id}}" uk-tooltip="حذف"><i class="far fa-trash-alt operation-icon red"></i></a>
+                        </td>
+                    </tr>
+                    {{/for}}
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("_Pagination")
+        {{else}}
+        <h5 class="txt-al-c">موردی یافت نشد.</h5>
+        {{/if}}
+    </script>
+}

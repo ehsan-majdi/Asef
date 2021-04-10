@@ -1,0 +1,94 @@
+﻿@model Nig.Model.Context.Account.User
+@{
+    ViewBag.Title = "ویرایش اطلاعات";
+}
+
+@Html.Partial("_PageHeader")
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/"><i class="fas fa-home"></i></a></li>
+            <li><a href="/profile">اطلاعات کاربر</a></li>
+            <li>ویرایش</li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div id="main-page-container" class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l uk-flex-center relative" uk-grid>
+            <form id="frmUser" action="/api/v1/user/changeinfo" method="post" data-success="saveComplete" loader="2">
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtFirstName">نام</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-user"></i></span>
+                            <input id="txtFirstName" class="uk-input" type="text" name="firstName" data-validate="required, PersianText" value="@Model.FirstName" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtLastName">نام خانوادگی</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-users"></i></span>
+                            <input id="txtLastName" class="uk-input" type="text" name="lastName" data-validate="required, PersianText" value="@Model.LastName" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtMobileNumber">تلفن همراه</label>
+                    <div class="uk-form-controls relative">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-mobile-android"></i></span>
+                            <input id="txtMobileNumber" class="uk-input" type="tel" name="mobileNumber" data-validate="mobileNumber" value="@Model.MobileNumber" disabled />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtEmail">ایمیل</label>
+                    <div class="uk-form-controls relative">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-envelope"></i></span>
+                            <input id="txtEmail" class="uk-input" type="email" name="email" data-validate="email" value="@Model.Email" disabled />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="cmbSex">جنسیت</label>
+                    <div class="uk-form-controls">
+                        <select id="cmbSex" class="uk-select" name="sex" data-validate="required">
+                            <option value="">...</option>
+                            <option value="1" @(Model.SexId == Nig.Model.Context.Account.Enum.Sex.Male.Id ? "selected=\"selected\"" : "")>آقا</option>
+                            <option value="2" @(Model.SexId == Nig.Model.Context.Account.Enum.Sex.Female.Id ? "selected=\"selected\"" : "")>خانم</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <button id="btnSubmit" type="submit" class="uk-button btn-site uk-width-1-1">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnSubmit").on("click", function (event) {
+                event.preventDefault();
+                $("#frmUser").makeRequest();
+            });
+
+        });
+
+        function saveComplete(response) {
+            alert(response.message);
+        }
+    </script>
+}

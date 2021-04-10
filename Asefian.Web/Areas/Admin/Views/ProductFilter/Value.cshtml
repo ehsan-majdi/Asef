@@ -1,0 +1,117 @@
+﻿@model Asefian.Model.Context.Data.ProductFilter
+@{
+    ViewBag.Title = "لیست فیلترها";
+}
+<link href="/styles/app/app.product-filter.css" rel="stylesheet" />
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/product/filter/list">لیست فیلترها</a></li>
+        </ul>
+    </div>
+    <input type="hidden" id="hiddenId" value="@ViewBag.Id" />
+    <div class="content">
+        <form id="frmProductFilterValue" class="uk-margin" action="/admin/product/filter/SaveValueList" @*data-load="/admin/product/load"*@ method="post" data-success="saveComplete" loader="1" data-load-success="loadComplete">
+            <input type="hidden" id="hiddenId" name="productFilterId" value="@ViewBag.Id" />
+
+            @if (Model.FilterTypeId == Asefian.Model.Context.Data.Enum.ProductFilterType.Color.Id)
+            {
+
+                <div class="uk-width-1-1@m uk-margin-medium-top">
+                    <ul uk-tab="connect: #translationList">
+                        @foreach (var item in Asefian.Model.Context.Language.GetList())
+                        {
+                            <li><a href="#">@item.PersianTitle</a></li>
+                        }
+                    </ul>
+                    <ul id="translationList" class="uk-switcher uk-margin" data-list="translations">
+                        @foreach (var item in Asefian.Model.Context.Language.GetList())
+                        {
+                            <li data-list-form>
+                                <input name="languageId" type="hidden" value="@item.Id" key lock />
+                                <label>عنوان</label>
+                                <div class="uk-inline uk-width-1-1">
+                                    <span class="uk-form-icon"><i class="fal fa-heading"></i></span>
+                                    <input name="title" type="color" class="uk-input uk-display-inline w100 txtValue" />
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="uk-width-1-1@m uk-margin-medium-top">
+                    <ul uk-tab="connect: #translationList">
+                        @foreach (var item in Asefian.Model.Context.Language.GetList())
+                        {
+                            <li><a href="#">@item.PersianTitle</a></li>
+                        }
+                    </ul>
+                    <ul id="translationList" class="uk-switcher uk-margin" data-list="translations">
+                        @foreach (var item in Asefian.Model.Context.Language.GetList())
+                        {
+                            <li data-list-form>
+                                <input name="languageId" type="hidden" value="@item.Id" key lock />
+                                <label>عنوان</label>
+                                <div class="uk-inline uk-width-1-1">
+                                    <span class="uk-form-icon"><i class="fal fa-heading"></i></span>
+                                    <input name="title" type="text" class="uk-input uk-display-inline w200 txtValue" />
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+            <button type="submit" id="btnAddValue" class="uk-button uk-button-primary"><i class="far fa-plus v-middle"></i>&nbsp; اضافه کردن</button>
+        </form>
+        <div id="list" class="m-top-20" data-url="/admin/product/filter/valueList/@ViewBag.Id"></div>
+
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l uk-flex-center uk-margin" uk-grid>
+            <div class="txt-al-c">
+                <button id="btnSaveRearrange" type="button" class="uk-button uk-button-primary uk-hidden w150"><i class="fal fa-save"></i> ذخیره</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="/scripts/app/product-filter/app.value.js"></script>
+
+    <script id="template" type="text/x-jsrender">
+        {{if list.length > 0}}
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l uk-flex-center" uk-grid>
+
+            <ul id="valueList" class="uk-grid-small uk-child-width-1-1" uk-sortable="handle: .uk-card" uk-grid>
+                {{for list}}
+                <li>
+                    <div class="uk-card uk-card-default uk-card-body value-item" data-order="{{:order}}" data-id="{{:id}}">
+
+
+                        @if (Model.FilterTypeId == Asefian.Model.Context.Data.Enum.ProductFilterType.Color.Id)
+                        {
+                            <text><span class="item-color" style="background-color: {{:value}}"></span></text>
+                        }
+                        else
+                        {
+                            <text>{{:value}}</text>
+                        }
+                        {{if statusId == 1}}
+                        <i class="inactive fas fa-check icon green"></i>
+                        {{else statusId == 2}}
+                        <i class="active fas fa-times icon red"></i>
+                        {{/if}}
+                    </div>
+                </li>
+                {{/for}}
+            </ul>
+
+            {{else}}
+            <h5 class="txt-al-c">موردی یافت نشد.</h5>
+            {{/if}}
+        </div>
+    </script>
+
+}

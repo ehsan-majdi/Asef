@@ -1,0 +1,253 @@
+﻿html {
+    background-color: #f2f3f8;
+}
+
+body {
+    min-width: 100%;
+}
+
+    body * {
+        direction: rtl;
+    }
+
+.uk-container {
+    padding-bottom: 40px;
+    margin-top: 30px;
+}
+
+.content {
+    padding: 30px;
+    background-color: white;
+}
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background-color: white;
+}
+
+#main-menu-bar .uk-offcanvas-bar {
+    background-color: #fff;
+    color: #666;
+}
+
+#menu .uk-nav-default > li > a {
+    color: #666;
+}
+
+#menu .uk-nav-default .uk-nav-sub a {
+    color: #999;
+}
+
+#menu .icon {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    font-size: 16px;
+    vertical-align: middle;
+    padding-left: 5px;
+    margin: 5px 0;
+}
+
+.uk-offcanvas-bar {
+    padding: 40px 20px;
+}
+
+    .uk-offcanvas-bar .uk-offcanvas-close {
+        color: #666;
+    }
+
+#menu .uk-nav-default {
+    font-size: 1rem;
+}
+
+#menu .uk-nav-parent-icon > .uk-parent > a::after {
+    width: 0.7em;
+    height: 0.7em;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2014%2014%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolyline%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%221.1%22%20points%3D%2210%201%204%207%2010%2013%22%20%2F%3E%0A%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    margin-top: 9px;
+    transition-duration: 0.5s;
+    transition-property: transform;
+}
+
+#menu .uk-nav-parent-icon > .uk-parent.uk-open > a::after {
+    transform: rotate(-90deg);
+}
+
+.list-form {
+    position: relative;
+    min-height: 70px;
+}
+
+.operation-icon {
+    display: inline-block;
+    width: 15px;
+    text-align: center;
+    padding: 4px;
+    vertical-align: middle;
+    font-size: 13px;
+}
+
+.chips {
+    background-color: #CFD8DC;
+    padding: 4px 8px 4px 6px;
+    margin: 5px 5px;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+    .chips .remove {
+        display: inline-block;
+        background: gray;
+        color: white;
+        padding-top: 3px;
+        border-radius: 50%;
+        width: 17px;
+        height: 14px;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        margin-right: 3px;
+    }
+
+.green {
+    color: #0abb87;
+}
+
+.red {
+    color: #fd397a;
+}
+
+.blue {
+    color: #039BE5;
+}
+
+.yellow {
+    color: #ffb822;
+}
+
+.purple {
+    color: #5867dd;
+}
+
+.white {
+    color: white;
+}
+
+.bg-green {
+    background-color: #0abb87;
+}
+
+.bg-red {
+    background-color: #fd397a;
+}
+
+.bg-blue {
+    background-color: #039BE5;
+}
+
+.bg-yellow {
+    background-color: #ffb822;
+}
+
+.bg-purple {
+    background-color: #5867dd;
+}
+
+.form-controls-spinner, .valid-icon, .invalid-icon {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    display: none;
+}
+
+.form-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    width: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+}
+
+.input-ltr-left-icon {
+    text-align: left;
+    padding-left: 35px;
+    direction: ltr;
+}
+
+.invalid-icon {
+    color: #e53935;
+}
+
+.valid-icon {
+    color: #43A047;
+}
+
+.form-controls-spinner svg {
+    width: 20px;
+    height: 20px;
+}
+
+.icon {
+    width: 23px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.uk-navbar-nav > li > a, .uk-navbar-item, .uk-navbar-toggle {
+    height: 50px;
+}
+
+.inactive-mobile, .active-mobile, .inactive-email, .active-email {
+    width: 17px;
+    text-align: center;
+}
+
+.list-loader svg {
+    width: 17px;
+    height: 17px;
+}
+
+.fr-wrapper {
+    direction: ltr !important;
+}
+
+.list-dropdown {
+    padding: 10px;
+    text-align: right;
+}
+
+    .list-dropdown .uk-nav > li > a {
+        padding: 7px 0;
+    }
+
+
+.item-price {
+    font-size: 13px;
+    color: #388e3c;
+}
+
+.site-text-note {
+    line-height: 1.5;
+    color: #888;
+    margin-top: 3px;
+    font-size: 12px;
+}
+
+
+.uk-accordion-title {
+    border: solid 1px silver;
+    padding: 12px 15px;
+}
+
+.user-icon {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+}

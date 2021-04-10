@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "فیلترهای محصول";
+}
+<link href="/styles/app/app.product.css" rel="stylesheet" />
+
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/product/list">محصولات</a></li>
+            <li><a href="/admin/product/filters/@ViewBag.Id">فیلترهای محصول</a></li>
+        </ul>
+    </div>
+    <form id="frmFilterValue" action="/admin/product/saveFilterValue" method="post" data-load="/admin/product/getFilterValue" loader="1" data-success="saveComplete">
+        <div class="uk-child-width-1-3@m" uk-grid>
+            <input id="hiddenId" type="hidden" value="@ViewBag.Id" lock />
+
+            @foreach (Asefian.Model.ViewModel.Data.ProductFilterViewModel item in ViewBag.FilterList)
+            {
+                <div>
+                    <div class="item uk-card uk-card-default uk-card-body">
+                        <input type="hidden" class="hiddenFilterId" value="@item.id" lock />
+                        <input type="hidden" class="hiddenFilterType" value="@item.filterTypeId" lock />
+
+                        <div>
+                            <h3 class="uk-card-title">@item.title</h3>
+                            @*<p class="uk-text-meta uk-margin-remove-top">@item.description</p>*@
+                        </div>
+                        <div class="item-container">
+                            @if (item.filterTypeId == Asefian.Model.Context.Data.Enum.ProductFilterType.Text.Id)
+                            {
+                                <label><input class="uk-input" type="text" name="datavalue"></label>
+                            }
+                            else if (item.filterTypeId == Asefian.Model.Context.Data.Enum.ProductFilterType.Selection.Id)
+                            {
+                                foreach (Asefian.Model.ViewModel.Data.ProductFilterValueViewModel childItem in item.valueList)
+                                {
+                                    <label><input class="uk-checkbox" type="checkbox" name="datavalue" value="@childItem.id"> <span>@childItem.value</span></label>
+                                }
+                            }
+                            else if (item.filterTypeId == Asefian.Model.Context.Data.Enum.ProductFilterType.Color.Id)
+                            {
+                                foreach (Asefian.Model.ViewModel.Data.ProductFilterValueViewModel childItem in item.valueList)
+                                {
+                                    <label><input class="uk-checkbox" type="checkbox" name="datavalue" value="@childItem.id"> <span class="item-color" style="background-color: @childItem.value;"></span></label>
+                                }
+                            }
+                            else if (item.filterTypeId == Asefian.Model.Context.Data.Enum.ProductFilterType.Boolean.Id)
+                            {
+                                <label><input class="uk-radio valueBoolean" type="radio" name="datavalue@(item.id)" value="true"> <span>دارد</span></label>
+                                <label><input class="uk-radio valueBoolean" type="radio" name="datavalue@(item.id)" value="false"> <span>ندارد</span></label>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <button id="btnSubmit" type="button" class="uk-margin uk-button uk-button-primary">ذخیره</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="/scripts/app/product/app.filters.js"></script>
+}

@@ -1,0 +1,113 @@
+﻿@model Asefian.Model.Context.Data.SpecialProject
+@{
+    ViewBag.Title = "گالری تصاویر محصول";
+}
+
+@Styles.Render("~/styles/fancy")
+<link href="/styles/app/app.product.css" rel="stylesheet" />
+<div class="uk-container">
+    <div class="subheader">
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i></a></li>
+            <li><a href="/admin/product/list">لیست محصولات</a></li>
+            @if (ViewBag.Id != null)
+            {
+                <li><a href="/admin/product/edit/@ViewBag.Id">ویرایش محصول</a></li>
+            }
+            else
+            {
+                <li><a href="/admin/product/add">محصول جدید</a></li>
+            }
+        </ul>
+    </div>
+    <div class="content">
+        <div class="uk-grid-small uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l uk-flex-center" uk-grid>
+            <form id="frmSpecialProject" class="form" action="/admin/specialProject/addImage" data-load="/admin/product/load" method="post" data-success="saveComplete" loader="1" data-load-success="loadComplete">
+                <input type="hidden" name="id" value="@ViewBag.Id" lock />
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="txtFileName">تصویر</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon"><i class="fal fa-image"></i></span>
+                            <input id="hiddenFileId" type="hidden" name="fileId" />
+                            <input id="txtFileName" class="uk-input input-ltr-left-icon" type="text" name="fileName" readonly />
+                            <input id="file" type="file" class="hide" />
+                            <span id="upload" class="form-icon"><i class="fal fa-upload"></i></span>
+                            <span id="clearFile" class="form-icon hide"><i class="fal fa-times"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="cmbStatus">وضعیت</label>
+                    <div class="uk-form-controls">
+                        <select id="cmbStatus" class="uk-select" name="statusId" data-validate="required">
+                            <option value="">...</option>
+                            <option value="1">فعال</option>
+                            <option value="2">غیر فعال</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-width-1-1@m uk-margin-medium-top">
+                    <ul uk-tab="connect: #translationList">
+                        @foreach (var item in Asefian.Model.Context.Language.GetList())
+                        {
+                            <li><a href="#">@item.PersianTitle</a></li>
+                        }
+                    </ul>
+                    <ul id="translationList" class="uk-switcher uk-margin" data-list="translations">
+                        @foreach (var item in Asefian.Model.Context.Language.GetList())
+                        {
+                            <li data-list-form>
+                                <input name="languageId" type="hidden" value="@item.Id" key lock />
+                                <label>عنوان</label>
+                                <div class="uk-inline uk-width-1-1">
+                                    <span class="uk-form-icon"><i class="fal fa-heading"></i></span>
+                                    <input class="uk-input" type="text" name="title" data-validate="required" />
+                                </div>
+                                <div class="uk-margin">
+                                    <label>توضیحات</label>
+                                    <div class="uk-inline uk-width-1-1 ">
+                                        <span class="uk-form-icon"><i class="fal fa-heading"></i></span>
+                                        <input class="uk-input" type="text" name="description" data-validate="required" />
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="uk-margin">
+                    <button id="btnSubmit" type="submit" class="uk-button uk-button-primary uk-width-1-1">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    @Scripts.Render("~/scripts/fancy")
+    @Scripts.Render("~/scripts/upload")
+    <script src="/scripts/app/specialProject/app.gallery.js"></script>
+    <script id="template" type="text/x-jsrender">
+        <ul class="uk-thumbnav" uk-margin>
+            {{for list}}
+            <li class="relative">
+                <a href="{{:link}}" class="gallery-file uk-background-cover uk-inline" title="{{:fileName}}" style="background-image: url('{{:link}}');">
+                    <div class="uk-position-cover"></div>
+                </a>
+                <a href="#" class="gallery-del-icon delete" data-id="{{:id}}"><i class="far fa-trash-alt m-top-7"></i></a>
+            </li>
+            {{/for}}
+            <li>
+                <a href="#" class="add add-file">
+                    <div class="uk-inline uk-dark">
+                        <div class="gallery-add-file"></div>
+                        <div class="uk-overlay-default uk-position-cover">
+                            <div class="uk-position-center"><i class="fas fa-plus fa-3x white"></i></div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </script>
+}

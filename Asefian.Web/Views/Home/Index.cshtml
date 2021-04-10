@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "صفحه اصلی";
+}
+<style>
+    .slider {
+        width: 100%;
+    }
+</style>
+<div style="text-align:center;" class="uk-container-expand">
+    @Html.Action("_slider")
+</div>
+<div style="text-align:center" class="uk-container">
+    @Html.Action("_category")
+</div>
+<div>
+    @Html.Action("_product")
+</div>
+<div>
+    @Html.Action("_backgroundImage")
+</div>
+
+
+

@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "هممکاری با ما";
+}
+
+<div class="uk-container">
+    <ul class="uk-breadcrumb">
+        <li><a href="@BaseController.MakeLanguageUrl("/home")"><i class="fal fa-home"></i></a></li>
+        <li><span>@Asefian.Web.Resource.Translation.WorkWithUs</span></li>
+    </ul>
+
+    <form id="frmWorkWithUs" class="form" action="/workwithus" method="post">
+        <input id="txtMessageType" type="hidden" name="messageTypeId" value="2" />
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="txtFullName">@Asefian.Web.Resource.Translation.FullName</label>
+            <div class="uk-form-controls">
+                <div class="uk-inline uk-width-1-2@m">
+                    <span class="uk-form-icon"><i class="fal fa-user"></i></span>
+                    <input id="txtFullName" class="uk-input" type="text" name="fullName" data-validate="required,PersianText" value="@(Model?.fullName)" />
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="txtMobileNumber">@Asefian.Web.Resource.Translation.MobileNumber</label>
+            <div class="uk-form-controls relative">
+                <div class="uk-inline uk-width-1-2@m">
+                    <span class="uk-form-icon"><i class="fal fa-mobile-android"></i></span>
+                    <input id="txtMobileNumber" class="uk-input" type="tel" name="mobileNumber" data-validate="required, mobileNumber" value="@(Model?.mobileNumber)" />
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="txtEmail">@Asefian.Web.Resource.Translation.Email</label>
+            <div class="uk-form-controls relative">
+                <div class="uk-inline uk-width-1-2@m">
+                    <span class="uk-form-icon"><i class="fal fa-at"></i></span>
+                    <input id="txtEmail" class="uk-input" type="email" name="email" data-validate="email" value="@(Model?.email)" />
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="txtMessage">@Asefian.Web.Resource.Translation.Message</label>
+            <div class="uk-form-controls relative">
+                <div class="uk-inline uk-width-1-1">
+                    <textarea id="txtMessage" class="uk-textarea" name="message" data-validate="required" rows="5">@(Model?.message)</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            @Html.Partial("_Captcha")
+        </div>
+
+        <div class="uk-margin">
+            <button id="btnRegister" type="submit" class="uk-button btn-site">@Asefian.Web.Resource.Translation.BtnSendMessage</button>
+        </div>
+
+        @if (!string.IsNullOrEmpty(ViewBag.Success))
+        {
+            <div class="uk-margin">
+                <div class="uk-alert-success" uk-alert>
+                    <p>@ViewBag.Success</p>
+                </div>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            <div class="uk-margin">
+                <div class="uk-alert-danger" uk-alert>
+                    <p>@ViewBag.Error</p>
+                </div>
+            </div>
+        }
+    </form>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnRegister").on("click", function (event) {
+                event.preventDefault();
+                if ($("#frmWorkWithUs").validate()) {
+                    $("#frmWorkWithUs").submit();
+                }
+            });
+        });
+    </script>
+}
+

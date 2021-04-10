@@ -1,0 +1,11 @@
+﻿<div class="captcha">
+    <h6><i class="reCaptcha fas fa-redo v-middle pointer"></i>@Asefian.Web.Resource.Translation.SecurityPhrase</h6>
+    <img class="imgCaptcha" src="/captcha" />
+    <input type="tel" name="captcha" />
+</div>
+
+<script type="text/javascript">
+    document.getElementsByClassName('reCaptcha')[0].addEventListener('click', function () {
+        document.getElementsByClassName('imgCaptcha')[0].src = '/captcha?rnd=' + Math.random();
+    });
+</script>
